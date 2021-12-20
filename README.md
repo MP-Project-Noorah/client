@@ -34,3 +34,8 @@
 ![image4 img](https://github.com/MP-Project-Noorah/client/blob/main/images/image4.png)
 ![image5 img](https://github.com/MP-Project-Noorah/client/blob/main/images/image5.png)
 ![image6 img](https://github.com/MP-Project-Noorah/client/blob/main/images/image6.png)
+
+## Links:
+
+[Link to presentation](https://www.google.com)
+[Link to Deployed App](https://www.google.com)

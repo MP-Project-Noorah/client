@@ -22,10 +22,6 @@
 - Delete comment: As an admin, I can start to remove a comment to any user so that I can't see it on the website and the user can't see it also.
 - Delete the user trip post: As an admin, I can start to remove the user trip post to any user so that I can't see it on the website and the user can't see it also.
 
-## UML:
-
-![Untitled%20Diagram.drawio img](https://github.com/noorah15/client/blob/main/Untitled%20Diagram.drawio.png)
-
 ## Design:
 
 ![image img](https://github.com/MP-Project-Noorah/client/blob/main/images/image.png)
@@ -34,6 +30,10 @@
 ![image4 img](https://github.com/MP-Project-Noorah/client/blob/main/images/image4.png)
 ![image5 img](https://github.com/MP-Project-Noorah/client/blob/main/images/image5.png)
 ![image6 img](https://github.com/MP-Project-Noorah/client/blob/main/images/image6.png)
+
+## UML:
+
+![Untitled%20Diagram.drawio img](https://github.com/noorah15/client/blob/main/Untitled%20Diagram.drawio.png)
 
 ## React Routes
 

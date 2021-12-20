@@ -37,5 +37,6 @@
 
 ## Links:
 
-[Link to presentation](https://www.google.com)
-[Link to Deployed App](https://www.google.com)
+- [Link to presentation](https://www.google.com)
+
+- [Link to Deployed App](https://www.google.com)

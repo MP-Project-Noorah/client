@@ -37,6 +37,10 @@
 
 ## Links:
 
+- [Link to server](https://github.com/MP-Project-Noorah/server)
+
+- [Link to client](https://github.com/MP-Project-Noorah/client)
+
 - [Link to presentation](https://www.google.com)
 
 - [Link to Deployed App](https://www.google.com)

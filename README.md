@@ -37,19 +37,25 @@
 
 ## React Routes
 
-| key               | Permissions | Behavior                                                  |
-| ----------------- | ----------- | --------------------------------------------------------- |
-| /                 | public      | It is showing the website description and trending trips. |
-| /trips            | public      | It shows all trips.                                       |
-| /tripInfo/:id     | public      | It shows specific trip.                                   |
-| /userTrip         | public      | It shows the user trip.                                   |
-| /userTripInfo/:id | public      | It shows the specific user trip.                          |
-| /addUserTrip      | user        | It shows the specific user trip.                          |
-| /signin           | public      | It allows the users to signin.                            |
-| /login            | public      | It allows the users to login.                             |
-| /resetPass        | user        | It allows the users to reset password                     |
-| /confirmEmail     | user        | It allows the users to confirm email                      |
-| /userInfo         | user        | It allows the users to get their own info.                |
+| key                    | Permissions | Behavior                                                  |
+| ---------------------- | ----------- | --------------------------------------------------------- |
+| /                      | public      | It is showing the website description and trending trips. |
+| /trips                 | public      | It shows all trips.                                       |
+| /trendingTrips         | public      | It shows the trending trips.                              |
+| /tripInfo/:id          | public      | It shows specific trip.                                   |
+| /userTrip              | public      | It shows the user trip.                                   |
+| /userTripInfo/:id      | public      | It shows the specific user trip.                          |
+| /addUserTrip           | user        | It shows the specific user trip.                          |
+| /signin                | public      | It allows the users to signin.                            |
+| /login                 | public      | It allows the users to login.                             |
+| /resetPass             | user        | It allows the users to reset password                     |
+| /confirmEmail          | user        | It allows the users to confirm email                      |
+| /userInfo              | user        | It allows the users to get their own info.                |
+| /recordedTrips         | user        | It allows the users to get their recorded trips info.     |
+| /addToRecordedTrips    | user        | It allows the users to add new trip.                      |
+| /editRecordedTrip      | user        | It allows the users to edit trip.                         |
+| /deleteToRecordedTrips | user        | It allows the users to delete trip.                       |
+| /myFav                 | user        | It allows the users to show the user favorite trips.      |
 
 ## Links:
 

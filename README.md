@@ -1,9 +1,5 @@
 # client
 
-# client
-
-# وجهتي
-
 ## User story format:
 
 - Signup: As an anon, I can sign up in the website as the user so that I have permission to add and remove my comments and add likes.

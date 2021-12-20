@@ -25,3 +25,12 @@
 ## UML:
 
 ![Untitled%20Diagram.drawio img](https://github.com/noorah15/client/blob/main/Untitled%20Diagram.drawio.png)
+
+## Design:
+
+![image img](https://github.com/MP-Project-Noorah/client/blob/main/images/image.png)
+![image2 img]https://github.com/MP-Project-Noorah/client/blob/main/images/image2.png)
+![image3 img](https://github.com/MP-Project-Noorah/client/blob/main/images/image3.png)
+![image4 img]((https://github.com/MP-Project-Noorah/client/blob/main/images/image4.png)
+![image5 img]((https://github.com/MP-Project-Noorah/client/blob/main/images/image5.png)
+![image6 img]((https://github.com/MP-Project-Noorah/client/blob/main/images/image6.png)

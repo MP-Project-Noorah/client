@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Flex, Spacer, Box, Button, HStack } from "@chakra-ui/react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Header() {
+  const navigate = useNavigate();
   return (
     <div>
       <Box
@@ -24,10 +25,18 @@ export default function Header() {
               <Link to="/dayInYourCity"> يوم في مدينتك </Link>
               <Link to="/userDestinations"> وجهات المستخدمين </Link>
               <Link to="/travelTips"> ارشادات السفر </Link>
-              <Button colorScheme="blue" variant="solid">
+              <Button
+                colorScheme="blue"
+                variant="solid"
+                onClick={() => navigate("/login")}
+              >
                 تسجيل الدخول
               </Button>
-              <Button colorScheme="blue" variant="outline">
+              <Button
+                colorScheme="blue"
+                variant="outline"
+                onClick={() => navigate("/signup")}
+              >
                 التسجيل
               </Button>
             </HStack>

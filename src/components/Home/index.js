@@ -8,6 +8,7 @@ import {
   Heading,
   Text,
   Button,
+  Spacer,
 } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 
@@ -89,6 +90,7 @@ export default function Home() {
               </Button>
             </Box>
           </GridItem>
+
           <GridItem colSpan={1}>
             <Image src="/home1.jpeg" alt="wjhat" w="70%" />
           </GridItem>

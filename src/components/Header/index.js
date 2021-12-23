@@ -1,12 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Flex, Spacer, Box, Button, HStack } from "@chakra-ui/react";
-import { Navbar, Container, Nav } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Header() {
   return (
-    <div dir="rtl">
+    <div>
       <Box
         border="1px"
         fontSize="14px"
@@ -24,7 +23,7 @@ export default function Header() {
               <Link to="/destinations"> الوجهات </Link>
               <Link to="/dayInYourCity"> يوم في مدينتك </Link>
               <Link to="/userDestinations"> وجهات المستخدمين </Link>
-              <Link to="/destinations"> ارشادات السفر </Link>
+              <Link to="/travelTips"> ارشادات السفر </Link>
               <Button colorScheme="blue" variant="solid">
                 تسجيل الدخول
               </Button>
@@ -35,29 +34,6 @@ export default function Header() {
           </Box>
         </Flex>
       </Box>
-
-      {/* <Navbar bg="light" style={{ background: "white", height: "90px" }}>
-        <Container>
-          <Navbar.Brand>وجهتي</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link>
-              <Link to="/"> الرئيسية </Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link to="/destinations"> الوجهات </Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link to="/dayInYourCity"> يوم في مدينتك </Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link to="/userDestinations"> وجهات المستخدمين </Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link to="/destinations"> ارشادات السفر </Link>
-            </Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar> */}
     </div>
   );
 }

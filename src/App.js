@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Header from "./components/Header";
 import Destinations from "./components/Destinations";
+import DestinationInfo from "./components/DestinationInfo";
 import DayInYourCity from "./components/DayInYourCity";
 import UserDestinations from "./components/UserDestinations";
 import TravelTips from "./components/TravelTips";
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/destinations" element={<Destinations />} />
+        <Route exact path="/destinations/:id" element={<DestinationInfo />} />
         <Route exact path="/dayInYourCity" element={<DayInYourCity />} />
         <Route exact path="/userDestinations" element={<UserDestinations />} />
         <Route exact path="/travelTips" element={<TravelTips />} />

@@ -15,9 +15,13 @@ import {
   Badge,
   Image,
   Button,
+  Spacer,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import { Search2Icon, StarIcon } from "@chakra-ui/icons";
 export default function Destinations() {
+  const navigate = useNavigate();
+
   const property = {
     imageUrl: "https://bit.ly/2Z4KKcF",
     imageAlt: "Rear view of modern home with pool",
@@ -28,6 +32,7 @@ export default function Destinations() {
     reviewCount: 34,
     rating: 4,
   };
+
   return (
     <div>
       <Grid
@@ -54,11 +59,12 @@ export default function Destinations() {
           </RangeSlider>
 
           <h1>التصنيف:</h1>
-          <Select placeholder="الأفضل مبيعًا">
-            <option value="val1">الأعلى تقييمًا</option>
-            <option value="val2">الأقل تقييمًا</option>
-            <option value="val3">الثمن من الأعلى الى الأقل </option>
-            <option value="val4">الثمن من الأقل الى الأعلى</option>
+          <Select placeholder="الكل">
+            <option value="val1">الرئيسية</option>
+            <option value="val2">الترفيهية</option>
+            <option value="val3">ثقافية</option>
+            <option value="val4">رياضية</option>
+            <option value="val4">دينية</option>
           </Select>
           <h1>المدينة:</h1>
           <Select placeholder="مكة">
@@ -73,22 +79,24 @@ export default function Destinations() {
             مناسب للعائلة: <Switch size="md" />
           </h1>
         </GridItem>
-        <GridItem colSpan={4} rowSpan={1} display="flex">
-          <InputGroup w="40%">
+        <GridItem colSpan={4} rowSpan={1} display="flex" alignItems="baseline">
+          <InputGroup w="30%">
             <Input placeholder="البحث" />
             <InputLeftElement children={<Search2Icon color="gray.300" />} />
           </InputGroup>
+          <Spacer />
 
-          <Select placeholder="الأفضل مبيعًا" w="40%">
+          <Select placeholder="الأفضل مبيعًا" w="30%">
             <option value="val1">الأعلى تقييمًا</option>
             <option value="val2">الأقل تقييمًا</option>
             <option value="val3">الثمن من الأعلى الى الأقل </option>
             <option value="val4">الثمن من الأقل الى الأعلى</option>
             <option value="val4">الأحدث</option>
           </Select>
+          <Spacer />
 
           <h1>
-            شامل الوجهات المنتهية: <Switch size="md" />
+            شامل الوجهات المنتهية تاريخها: <Switch size="md" />
           </h1>
         </GridItem>
 
@@ -129,7 +137,15 @@ export default function Destinations() {
                       {property.reviewCount} مراجعة
                     </Box>
 
-                    <Button borderRadius="none">احجز الآن</Button>
+                    <Button
+                      borderRadius="none"
+                      onClick={() => {
+                        console.log("ndn nvf");
+                        navigate(`/destinations/${1}`);
+                      }}
+                    >
+                      احجز الآن
+                    </Button>
                   </Box>
                 </Box>
               </Box>

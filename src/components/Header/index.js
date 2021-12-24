@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Flex, Spacer, Box, Button, HStack } from "@chakra-ui/react";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Header() {
   const navigate = useNavigate();

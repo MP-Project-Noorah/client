@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { login2 } from "./../../reducers/login";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Input,
   Heading,
@@ -18,6 +18,8 @@ export default function Login() {
 
   const [showPassword, setShowPassword] = useState(false);
   const showPasswordFun = () => setShowPassword(!showPassword);
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const state = useSelector((state) => {
@@ -41,6 +43,7 @@ export default function Login() {
       dispatch(login2(data));
 
       alert("Successful login");
+      navigate("/");
     } catch (err) {
       alert("Unsuccessful login");
     }

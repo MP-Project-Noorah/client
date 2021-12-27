@@ -9,7 +9,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 
-export default function Signup() {
+export default function Signup({ adminRole }) {
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   const showPasswordFun = () => setShowPassword(!showPassword);
@@ -18,19 +18,25 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
-  const [role, setRole] = useState("61a48b1362b112055163b916");
+  const [role, setRole] = useState(
+    adminRole ? adminRole : "61a48b1362b112055163b916"
+  );
+
+  console.log(role);
 
   const signup = async () => {
-    try {
-      const result = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/users/signup`,
-        { email, password: password1, role }
-      );
-      console.log(result.data);
-      alert("Successful registering");
-    } catch (err) {
-      alert("Unsuccessful registering");
-    }
+    if (password1.length && password1 === password2)
+      try {
+        const result = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/users/signup`,
+          { email, password: password1, role }
+        );
+        console.log(result.data);
+        alert("Successful registering");
+      } catch (err) {
+        alert("Unsuccessful registering");
+      }
+    else alert("كلمة المرور غير متطابقة");
   };
 
   return (

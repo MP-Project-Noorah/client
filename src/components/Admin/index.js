@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 import AdminHotels from "./../AdminHotels";
 import AdminDestinations from "./../AdminDestinations";
@@ -6,8 +6,10 @@ import AdminFestivals from "./../AdminFestivals";
 import AdminTransportation from "./../AdminTransportation";
 import AdminTouristGuides from "./../AdminTouristGuides";
 import AdminFlights from "./../AdminFlights";
+import Signup from "./../Signup";
 
 export default function Admin() {
+  const [adminRole, setAdminRole] = useState("61a48ba362b112055163b918");
   return (
     <div>
       <Tabs variant="enclosed" margin="5%">
@@ -18,6 +20,7 @@ export default function Admin() {
           <Tab>المرشد السياحي</Tab>
           <Tab>التذاكر</Tab>
           <Tab>الوجهات</Tab>
+          <Tab>تسجيل الآدمن</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
@@ -37,6 +40,9 @@ export default function Admin() {
           </TabPanel>
           <TabPanel>
             <AdminDestinations />
+          </TabPanel>
+          <TabPanel>
+            <Signup adminRole={adminRole} />
           </TabPanel>
         </TabPanels>
       </Tabs>

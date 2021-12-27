@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { login2 } from "./../../reducers/login";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   Input,
   Heading,
@@ -9,8 +13,39 @@ import {
 } from "@chakra-ui/react";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const [showPassword, setShowPassword] = useState(false);
   const showPasswordFun = () => setShowPassword(!showPassword);
+
+  const dispatch = useDispatch();
+  const state = useSelector((state) => {
+    return state;
+  });
+
+  const login = async () => {
+    try {
+      const result = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/users/login`,
+        { email, password }
+      );
+
+      const data = {
+        token: result.data.token,
+        role: result.data.result[0].role,
+        ID: result.data.result[0]._id,
+        username: result.data.result[0].username,
+      };
+
+      dispatch(login2(data));
+
+      alert("Successful login");
+    } catch (err) {
+      alert("Unsuccessful login");
+    }
+  };
+
   return (
     <div>
       <Box
@@ -31,6 +66,7 @@ export default function Login() {
           type="email"
           placeholder="اكتب إيميلك"
           marginTop="5%"
+          onChange={(e) => setEmail(e.target.value)}
         />
         <Heading fontSize="l" marginTop="3%">
           كلمة المرور:
@@ -41,6 +77,7 @@ export default function Login() {
             pr="4.5rem"
             type={showPassword ? "text" : "password"}
             placeholder="اكتب كلمة مرور"
+            onChange={(e) => setPassword(e.target.value)}
           />
           <InputLeftElement width="4.5rem">
             <Button h="1.75rem" size="sm" onClick={showPasswordFun}>
@@ -50,10 +87,10 @@ export default function Login() {
         </InputGroup>
 
         <Heading fontSize="l" marginTop="3%">
-          اعد كتابة كلمة المرور:
+          هل نسيت كلمة المرور؟ <Link to="/resetPass">اضغط هنا</Link>
         </Heading>
 
-        <Button marginTop="13%" w="100%">
+        <Button marginTop="13%" w="100%" onClick={() => login()}>
           التسجيل
         </Button>
       </Box>

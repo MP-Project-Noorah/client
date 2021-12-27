@@ -9,7 +9,8 @@ import TravelTips from "./components/TravelTips";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Admin from "./components/Admin";
-
+import ResetPass from "./components/ResetPass";
+import CompleteResetPassword from "./components/CompleteResetPassword";
 function App() {
   return (
     <>
@@ -24,6 +25,13 @@ function App() {
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/admin" element={<Admin />} />
+        <Route exact path="/resetPass" element={<ResetPass />} />
+        <Route
+          exact
+          path="users/completeResetPassword/:id"
+          element={<CompleteResetPassword />}
+        />
+
         <Route path="*" element={<h1> 404 </h1>} />
       </Routes>
     </>

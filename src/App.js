@@ -8,6 +8,7 @@ import UserDestinations from "./components/UserDestinations";
 import TravelTips from "./components/TravelTips";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
+import Admin from "./components/Admin";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route exact path="/travelTips" element={<TravelTips />} />
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/login" element={<Login />} />
+        <Route exact path="/admin" element={<Admin />} />
         <Route path="*" element={<h1> 404 </h1>} />
       </Routes>
     </>

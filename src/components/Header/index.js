@@ -24,6 +24,7 @@ export default function Header() {
               <Link to="/dayInYourCity"> يوم في مدينتك </Link>
               <Link to="/userDestinations"> وجهات المستخدمين </Link>
               <Link to="/travelTips"> ارشادات السفر </Link>
+              <Link to="/admin"> Admin </Link>
               <Button
                 colorScheme="blue"
                 variant="solid"

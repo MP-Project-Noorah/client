@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   Input,
   Heading,
@@ -8,11 +9,35 @@ import {
   Box,
 } from "@chakra-ui/react";
 
-export default function Signup() {
+export default function Signup({ adminRole }) {
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   const showPasswordFun = () => setShowPassword(!showPassword);
   const showPasswordFun2 = () => setShowPassword2(!showPassword2);
+
+  const [email, setEmail] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [role, setRole] = useState(
+    adminRole ? adminRole : "61a48b1362b112055163b916"
+  );
+
+  console.log(role);
+
+  const signup = async () => {
+    if (password1.length && password1 === password2)
+      try {
+        const result = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}/users/signup`,
+          { email, password: password1, role }
+        );
+        console.log(result.data);
+        alert("Successful registering");
+      } catch (err) {
+        alert("Unsuccessful registering");
+      }
+    else alert("كلمة المرور غير متطابقة");
+  };
 
   return (
     <div>
@@ -34,6 +59,7 @@ export default function Signup() {
           type="email"
           placeholder="اكتب إيميلك"
           marginTop="5%"
+          onChange={(e) => setEmail(e.target.value)}
         />
         <Heading fontSize="l" marginTop="3%">
           كلمة المرور:
@@ -44,6 +70,7 @@ export default function Signup() {
             pr="4.5rem"
             type={showPassword ? "text" : "password"}
             placeholder="اكتب كلمة مرور"
+            onChange={(e) => setPassword1(e.target.value)}
           />
           <InputLeftElement width="4.5rem">
             <Button h="1.75rem" size="sm" onClick={showPasswordFun}>
@@ -61,6 +88,7 @@ export default function Signup() {
             pr="4.5rem"
             type={showPassword2 ? "text" : "password"}
             placeholder="اعد كتابة كلمة المرور"
+            onChange={(e) => setPassword2(e.target.value)}
           />
           <InputLeftElement width="4.5rem">
             <Button h="1.75rem" size="sm" onClick={showPasswordFun2}>
@@ -68,7 +96,7 @@ export default function Signup() {
             </Button>
           </InputLeftElement>
         </InputGroup>
-        <Button marginTop="13%" w="100%">
+        <Button marginTop="13%" w="100%" onClick={() => signup()}>
           التسجيل
         </Button>
       </Box>

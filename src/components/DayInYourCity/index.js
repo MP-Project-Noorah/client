@@ -139,7 +139,7 @@ export default function DayInYourCity() {
                       borderRadius="none"
                       onClick={() => {
                         //console.log("ndn nvf");
-                        //navigate(`/destinations/${1}`);
+                        navigate(`/destinations/${1}`);
                       }}
                     >
                       احجز الآن

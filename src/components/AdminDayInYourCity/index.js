@@ -2,17 +2,16 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Input, Heading, Button, Box, Textarea } from "@chakra-ui/react";
 
-export default function AdminDestinations() {
-  const [destinationsIds, setDestinationsIds] = useState([]);
-  const [festivalIds, setFestivalIds] = useState([]);
-  const [festivalName, setFestivalName] = useState("");
+export default function AdminDayInYourCity() {
+  const [dayInYourCity, setDayInYourCity] = useState([]);
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
   const [desc, setDesc] = useState("");
   const [cost, setCost] = useState(0);
-  const [days, setDays] = useState(0);
-  const [date, setDate] = useState("");
+  const [expiryDate, setExpiryDate] = useState("");
   const [catg, setCatg] = useState("");
+  const [timeStart, setTimeStart] = useState(0);
+  const [timeFinish, setTimeFinish] = useState(0);
 
   useEffect(() => {
     getAllItems();
@@ -21,29 +20,29 @@ export default function AdminDestinations() {
   const getAllItems = async () => {
     try {
       const result = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/destinations/get`
+        `${process.env.REACT_APP_BASE_URL}/dayInYourCity/get`
       );
 
-      setDestinationsIds(result.data);
+      setDayInYourCity(result.data);
       //console.log(result.data);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const addDestinations = async () => {
+  const addDayInYourCity = async () => {
     try {
       const result = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/destinations/add`,
+        `${process.env.REACT_APP_BASE_URL}/dayInYourCity/add`,
         {
           name,
           city,
           desc,
-          days,
-          date,
+          expiryDate,
           cost,
           catg,
-          festivalIds,
+          timeStart,
+          timeFinish,
         }
         // {
         //   headers: {
@@ -60,12 +59,12 @@ export default function AdminDestinations() {
     }
   };
 
-  const deleteDestinations = async (destinationId) => {
+  const deleteDayInYourCity = async (dayInYourCityId) => {
     try {
       const result = await axios.delete(
-        `${process.env.REACT_APP_BASE_URL}/destinations/del`,
+        `${process.env.REACT_APP_BASE_URL}/dayInYourCity/del`,
         {
-          data: { destinationId },
+          data: { dayInYourCityId },
           // headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
@@ -86,39 +85,6 @@ export default function AdminDestinations() {
         borderColor="#ccd0d5"
         padding="50"
       >
-        <Heading fontSize="l" marginTop="3%">
-          الفعاليات:
-        </Heading>
-
-        <Input
-          pr="4.5rem"
-          type="text"
-          placeholder="الفعاليات"
-          onChange={(e) => setFestivalName(e.target.value)}
-        />
-
-        <Button
-          marginTop="13%"
-          w="100%"
-          onClick={() => {
-            setFestivalIds([...festivalIds, festivalName]);
-            console.log(festivalIds);
-          }}
-        >
-          الإضافة
-        </Button>
-
-        <h1>الأماكن</h1>
-        {festivalIds.map((item) => (
-          <>
-            <h2>{item}</h2>
-
-            <br />
-            <hr />
-            <br />
-          </>
-        ))}
-
         <Heading fontSize="l" marginTop="3%">
           الإسم:
         </Heading>
@@ -152,25 +118,14 @@ export default function AdminDestinations() {
         />
 
         <Heading fontSize="l" marginTop="3%">
-          التاريخ:
+          تاريخ نهاية الفعالية:
         </Heading>
 
         <Input
           pr="4.5rem"
           type="text"
           placeholder="2000-01-01"
-          onChange={(e) => setDate(e.target.value)}
-        />
-
-        <Heading fontSize="l" marginTop="3%">
-          عدد الأيام:
-        </Heading>
-
-        <Input
-          pr="4.5rem"
-          type="number"
-          placeholder="عدد الأيام"
-          onChange={(e) => setDays(e.target.value)}
+          onChange={(e) => setExpiryDate(e.target.value)}
         />
 
         <Heading fontSize="l" marginTop="3%">
@@ -185,6 +140,27 @@ export default function AdminDestinations() {
         />
 
         <Heading fontSize="l" marginTop="3%">
+          بداية الوقت :
+        </Heading>
+
+        <Input
+          pr="4.5rem"
+          type="number"
+          placeholder="بداية الوقت"
+          onChange={(e) => setTimeStart(e.target.value)}
+        />
+        <Heading fontSize="l" marginTop="3%">
+          نهاية الوقت:
+        </Heading>
+
+        <Input
+          pr="4.5rem"
+          type="number"
+          placeholder="نهاية الوقت"
+          onChange={(e) => setTimeFinish(e.target.value)}
+        />
+
+        <Heading fontSize="l" marginTop="3%">
           التصنيف:
         </Heading>
 
@@ -195,37 +171,29 @@ export default function AdminDestinations() {
           onChange={(e) => setCatg(e.target.value)}
         />
 
-        <Button marginTop="13%" w="100%" onClick={() => addDestinations()}>
+        <Button marginTop="13%" w="100%" onClick={() => addDayInYourCity()}>
           الإضافة
         </Button>
       </Box>
 
       <br />
       <h1>الوجهات</h1>
-      {destinationsIds.map((item) => (
+      {dayInYourCity.map((item) => (
         <>
           <h2>الإسم : {item.name}</h2>
           <p>المدينة : {item.city}</p>
           <p>الوصف : {item.desc}</p>
-          <p>عدد الأيام : {item.days}</p>
+          <p>تاريخ نهاية الفعالية : {item.expiryDate}</p>
           <p> التكلفة: {item.cost}</p>
-          <p> التاريخ: {item.date}</p>
+          <p> وقت البداية: {item.timeStart}</p>
+          <p> وقت النهاية: {item.timeFinish}</p>
           <p> التصنيف: {item.catg}</p>
 
-          <p> الأماكن: </p>
-
-          {item.festivalIds.map((item) => (
-            <>
-              <h2>{item}</h2>
-
-              <br />
-              <hr />
-              <br />
-            </>
-          ))}
-
           <br />
-          <Button onClick={() => deleteDestinations(item._id)}> delete </Button>
+          <Button onClick={() => deleteDayInYourCity(item._id)}>
+            {" "}
+            delete{" "}
+          </Button>
 
           <br />
           <hr />

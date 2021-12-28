@@ -7,6 +7,7 @@ import AdminTransportation from "./../AdminTransportation";
 import AdminTouristGuides from "./../AdminTouristGuides";
 import AdminFlights from "./../AdminFlights";
 import Signup from "./../Signup";
+import AdminDayInYourCity from "./../AdminDayInYourCity";
 
 export default function Admin() {
   const [adminRole, setAdminRole] = useState("61a48ba362b112055163b918");
@@ -20,6 +21,7 @@ export default function Admin() {
           <Tab>المرشد السياحي</Tab>
           <Tab>التذاكر</Tab>
           <Tab>الوجهات</Tab>
+          <Tab>يوم في مدينتك</Tab>
           <Tab>تسجيل الآدمن</Tab>
         </TabList>
         <TabPanels>
@@ -40,6 +42,9 @@ export default function Admin() {
           </TabPanel>
           <TabPanel>
             <AdminDestinations />
+          </TabPanel>
+          <TabPanel>
+            <AdminDayInYourCity />
           </TabPanel>
           <TabPanel>
             <Signup adminRole={adminRole} />

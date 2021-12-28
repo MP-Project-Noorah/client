@@ -15,6 +15,8 @@ import {
   Heading,
   Text,
 } from "@chakra-ui/react";
+import DestinationHotel from "./../DestinationHotel";
+
 //import { AccordionIcon } from "@chakra-ui/icons";
 
 export default function DestinationInfo() {
@@ -76,12 +78,7 @@ export default function DestinationInfo() {
             </Accordion>
           </TabPanel>
           <TabPanel>
-            <h1>اسم الفندق</h1>
-            <h1>4صور عن الفندق </h1>
-            <h1>معلومات الغرفة والسعر لكل منها </h1>
-            <h1>قوقل ماب</h1>
-            <h1>رابط معلومات مفصلة عن الفندق</h1>
-            <h1>عرض الفنادق على حسب السعر والتقييمات</h1>
+            <DestinationHotel />
           </TabPanel>
 
           <TabPanel>

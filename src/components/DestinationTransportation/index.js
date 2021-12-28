@@ -74,7 +74,7 @@ export default function DestinationTransportation() {
           <h1>{transportation.price}</h1>
         </>
       ) : (
-        <>nnnn</>
+        <></>
       )}
     </div>
   );

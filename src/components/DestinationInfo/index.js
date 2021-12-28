@@ -87,14 +87,14 @@ export default function DestinationInfo() {
 
           <TabPanel>
             <DestinationTouristGuides />
-            {/* <DestinationTransportation />
+            <DestinationTransportation />
             <DestinationFlights />
             <DestinationCost />
             <p>مرشد سياحي</p>
             <p>المواصلات</p>
             <p>مواصلات فقط للتوصيل الى الفندق</p>
             <p>الطيران</p>
-            <p>التكلفة الكلية</p> */}
+            <p>التكلفة الكلية</p>
           </TabPanel>
         </TabPanels>
       </Tabs>

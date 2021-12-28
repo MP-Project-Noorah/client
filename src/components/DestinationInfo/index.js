@@ -16,6 +16,10 @@ import {
   Text,
 } from "@chakra-ui/react";
 import DestinationHotel from "./../DestinationHotel";
+import DestinationTouristGuides from "./../DestinationTouristGuides";
+import DestinationTransportation from "./../DestinationTransportation";
+import DestinationFlights from "./../DestinationFlights";
+import DestinationCost from "./../DestinationCost";
 
 //import { AccordionIcon } from "@chakra-ui/icons";
 
@@ -82,11 +86,15 @@ export default function DestinationInfo() {
           </TabPanel>
 
           <TabPanel>
+            <DestinationTouristGuides />
+            {/* <DestinationTransportation />
+            <DestinationFlights />
+            <DestinationCost />
             <p>مرشد سياحي</p>
             <p>المواصلات</p>
             <p>مواصلات فقط للتوصيل الى الفندق</p>
             <p>الطيران</p>
-            <p>التكلفة الكلية</p>
+            <p>التكلفة الكلية</p> */}
           </TabPanel>
         </TabPanels>
       </Tabs>

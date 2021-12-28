@@ -154,6 +154,7 @@ export default function AdminFestivals() {
       <h1>الأماكن</h1>
       {festivals.map((item) => (
         <>
+          <h2>id : {item._id}</h2>
           <h2>الإسم : {item.name}</h2>
           <p>المدينة : {item.city}</p>
           <p>الوصف : {item.desc}</p>

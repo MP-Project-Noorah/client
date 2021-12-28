@@ -11,8 +11,10 @@ export default function AdminDestinations() {
   const [desc, setDesc] = useState("");
   const [cost, setCost] = useState(0);
   const [days, setDays] = useState(0);
-  const [date, setDate] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [expiryDate, setExpiryDate] = useState("");
   const [catg, setCatg] = useState("");
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     getAllItems();
@@ -40,10 +42,12 @@ export default function AdminDestinations() {
           city,
           desc,
           days,
-          date,
+          startDate,
+          expiryDate,
           cost,
           catg,
           festivalIds,
+          image,
         }
         // {
         //   headers: {
@@ -107,6 +111,16 @@ export default function AdminDestinations() {
         >
           الإضافة
         </Button>
+        <Button
+          marginTop="3%"
+          w="100%"
+          onClick={() => {
+            setFestivalIds([]);
+            //console.log(festivalIds);
+          }}
+        >
+          مسح
+        </Button>
 
         <h1>الأماكن</h1>
         {festivalIds.map((item) => (
@@ -152,14 +166,32 @@ export default function AdminDestinations() {
         />
 
         <Heading fontSize="l" marginTop="3%">
-          التاريخ:
+          رابط الصورة:
         </Heading>
 
         <Input
           pr="4.5rem"
           type="text"
+          placeholder="رابط الصورة"
+          onChange={(e) => setImage(e.target.value)}
+        />
+        <Heading fontSize="l" marginTop="3%">
+          تاريخ بداية الفعالية:
+        </Heading>
+        <Input
+          pr="4.5rem"
+          type="text"
           placeholder="2000-01-01"
-          onChange={(e) => setDate(e.target.value)}
+          onChange={(e) => setStartDate(e.target.value)}
+        />
+        <Heading fontSize="l" marginTop="3%">
+          تاريخ نهاية الفعالية:
+        </Heading>
+        <Input
+          pr="4.5rem"
+          type="text"
+          placeholder="2000-01-01"
+          onChange={(e) => setExpiryDate(e.target.value)}
         />
 
         <Heading fontSize="l" marginTop="3%">
@@ -204,16 +236,17 @@ export default function AdminDestinations() {
       <h1>الوجهات</h1>
       {destinationsIds.map((item) => (
         <>
+          <h2>id : {item._id}</h2>
+          <h2>الصورة : {item.image}</h2>
           <h2>الإسم : {item.name}</h2>
           <p>المدينة : {item.city}</p>
           <p>الوصف : {item.desc}</p>
           <p>عدد الأيام : {item.days}</p>
           <p> التكلفة: {item.cost}</p>
-          <p> التاريخ: {item.date}</p>
+          <p> تاريخ البداية: {item.startDate}</p>
+          <p> تاريخ النهاية: {item.expiryDate}</p>
           <p> التصنيف: {item.catg}</p>
-
           <p> الأماكن: </p>
-
           {item.festivalIds.map((item) => (
             <>
               <h2>{item}</h2>
@@ -223,10 +256,8 @@ export default function AdminDestinations() {
               <br />
             </>
           ))}
-
           <br />
           <Button onClick={() => deleteDestinations(item._id)}> delete </Button>
-
           <br />
           <hr />
           <br />

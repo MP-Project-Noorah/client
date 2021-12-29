@@ -16,6 +16,7 @@ export default function Signup({ adminRole }) {
   const showPasswordFun2 = () => setShowPassword2(!showPassword2);
 
   const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
   const [role, setRole] = useState(
@@ -29,7 +30,7 @@ export default function Signup({ adminRole }) {
       try {
         const result = await axios.post(
           `${process.env.REACT_APP_BASE_URL}/users/signup`,
-          { email, password: password1, role }
+          { email, password: password1, role, phoneNumber }
         );
         console.log(result.data);
         alert("Successful registering");
@@ -61,6 +62,19 @@ export default function Signup({ adminRole }) {
           marginTop="5%"
           onChange={(e) => setEmail(e.target.value)}
         />
+
+        <Heading fontSize="l" marginTop="3%">
+          رقم الجوال:
+        </Heading>
+
+        <Input
+          pr="4.5rem"
+          type="text"
+          placeholder="اكتب رقم جوالك"
+          marginTop="5%"
+          onChange={(e) => setPhoneNumber(e.target.value)}
+        />
+
         <Heading fontSize="l" marginTop="3%">
           كلمة المرور:
         </Heading>

@@ -21,6 +21,7 @@ import {
 } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { login2, logout2 } from "./../../reducers/login";
+import Logout from "./../Logout";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -63,35 +64,47 @@ export default function Header() {
                       variant="outline"
                     />
                     <MenuList>
-                      <MenuItem icon={<AddIcon />} command="⌘T">
-                        New Tab
+                      <MenuItem
+                        icon={<AddIcon />}
+                        command="⌘T"
+                        onClick={() => navigate("/UserInfo")}
+                      >
+                        معلوماتي
                       </MenuItem>
-                      <MenuItem icon={<ExternalLinkIcon />} command="⌘N">
-                        New Window
+                      <MenuItem
+                        icon={<ExternalLinkIcon />}
+                        command="⌘N"
+                        onClick={() => navigate("/MyOrders")}
+                      >
+                        طلباتي
                       </MenuItem>
-                      <MenuItem icon={<RepeatIcon />} command="⌘⇧N">
-                        Open Closed Tab
+                      <MenuItem
+                        icon={<RepeatIcon />}
+                        command="⌘⇧N"
+                        onClick={() => navigate("/MyFav")}
+                      >
+                        مفضلاتي
                       </MenuItem>
-                      <MenuItem icon={<EditIcon />} command="⌘O">
-                        Open File...
+                      <MenuItem
+                        icon={<EditIcon />}
+                        command="⌘O"
+                        onClick={() => {
+                          const data = {
+                            token: "",
+                            role: "",
+                            ID: "",
+                            username: "",
+                          };
+                          dispatch(logout2(data));
+                          navigate("/");
+                        }}
+                      >
+                        تسجيل الخروج
                       </MenuItem>
                     </MenuList>
                   </Menu>
 
-                  <Button
-                    colorScheme="blue"
-                    variant="solid"
-                    onClick={() => {
-                      const data = {
-                        token: "",
-                        role: "",
-                        ID: "",
-                        username: "",
-                      };
-                      dispatch(logout2(data));
-                      navigate("/");
-                    }}
-                  >
+                  <Button colorScheme="blue" variant="solid" onClick={() => {}}>
                     تسجيل الخروج
                   </Button>
                 </>

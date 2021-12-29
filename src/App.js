@@ -12,6 +12,9 @@ import Login from "./components/Login";
 import Admin from "./components/Admin";
 import ResetPass from "./components/ResetPass";
 import CompleteResetPassword from "./components/CompleteResetPassword";
+import UserInfo from "./components/UserInfo";
+import MyFav from "./components/MyFav";
+import MyOrders from "./components/MyOrders";
 function App() {
   return (
     <>
@@ -19,6 +22,9 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/destinations" element={<Destinations />} />
+        <Route exact path="/UserInfo" element={<UserInfo />} />
+        <Route exact path="/MyFav" element={<MyFav />} />
+        <Route exact path="/MyOrders" element={<MyOrders />} />
         <Route
           exact
           path="/destinations/:city/:id"

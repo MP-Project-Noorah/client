@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Search2Icon, StarIcon } from "@chakra-ui/icons";
+
 import {
   Grid,
   GridItem,
@@ -20,14 +21,32 @@ import {
   Button,
   Spacer,
 } from "@chakra-ui/react";
+import FavIcon from "../FavIcon";
 
 export default function Destinations() {
   const navigate = useNavigate();
 
   const [destinations, setDestinations] = useState([]);
+  const [user, setUser] = useState("");
+  const [id, setId] = useState(localStorage.getItem("ID"));
+
   useEffect(() => {
+    getUserItem();
     getAllItems();
   }, []);
+
+  const getUserItem = async () => {
+    try {
+      const result = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/users/get/${id}`
+      );
+
+      setUser(result.data);
+      console.log(result.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const getAllItems = async () => {
     try {
@@ -142,6 +161,12 @@ export default function Destinations() {
                         >
                           {item.catg} &bull; مناسب للعائلة
                         </Box>
+                        <FavIcon
+                          idPro={item._id}
+                          getAllItems={getAllItems}
+                          user={user}
+                          getUserItem={getUserItem}
+                        />
                       </Box>
                       <Box>
                         {" "}
@@ -165,7 +190,6 @@ export default function Destinations() {
                         <Button
                           borderRadius="none"
                           onClick={() => {
-                            console.log("ndn nvf");
                             navigate(`/destinations/${item.city}/${item._id}`);
                           }}
                         >

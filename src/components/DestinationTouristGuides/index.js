@@ -11,7 +11,7 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 
-export default function DestinationTouristGuides() {
+export default function DestinationTouristGuides({ city }) {
   const [touristGuides, setTouristGuides] = useState([]);
   const [touristGuide, setTouristGuide] = useState("");
   useEffect(() => {
@@ -21,11 +21,10 @@ export default function DestinationTouristGuides() {
   const getAllItemsByCity = async () => {
     try {
       const result = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/touristGuides/getByCity/${"القصيم"}`
+        `${process.env.REACT_APP_BASE_URL}/touristGuides/getByCity/${city}`
       );
 
       setTouristGuides(result.data);
-      console.log(result.data);
     } catch (err) {
       console.log(err);
     }
@@ -38,7 +37,6 @@ export default function DestinationTouristGuides() {
       );
 
       setTouristGuide(result.data);
-      console.log(result.data);
     } catch (err) {
       console.log(err);
     }
@@ -46,6 +44,7 @@ export default function DestinationTouristGuides() {
 
   return (
     <div>
+      <h1>المرشد السياحي</h1>
       <Select
         placeholder="الكل"
         onChange={(e) => {
@@ -53,7 +52,6 @@ export default function DestinationTouristGuides() {
         }}
       >
         {touristGuides.map((item) => {
-          console.log(item.avter);
           return (
             <>
               <option value={item._id}>
@@ -73,7 +71,7 @@ export default function DestinationTouristGuides() {
           <h1>{touristGuide.mobile}</h1>
         </>
       ) : (
-        <>nnnn</>
+        <></>
       )}
     </div>
   );

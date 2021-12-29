@@ -11,7 +11,7 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 
-export default function DestinationFlights() {
+export default function DestinationFlights({ city }) {
   const [flights, setFlights] = useState([]);
   const [flight, setFlight] = useState("");
 
@@ -24,7 +24,7 @@ export default function DestinationFlights() {
       const result = await axios.get(
         `${
           process.env.REACT_APP_BASE_URL
-        }/flights/getByCity/${"القصيم"}/${"الرياض"}`
+        }/flights/getByCity/${city}/${"الرياض"}`
       );
 
       setFlights(result.data);
@@ -49,6 +49,7 @@ export default function DestinationFlights() {
 
   return (
     <div>
+      <h1>الحجوزات</h1>
       <Select
         placeholder="الكل"
         onChange={(e) => {

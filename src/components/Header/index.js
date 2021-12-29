@@ -1,8 +1,27 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Flex, Spacer, Box, Button, HStack } from "@chakra-ui/react";
+import {
+  Flex,
+  Spacer,
+  Box,
+  Button,
+  HStack,
+  MenuList,
+  MenuItem,
+  Menu,
+  MenuButton,
+  IconButton,
+} from "@chakra-ui/react";
+import {
+  HamburgerIcon,
+  AddIcon,
+  RepeatIcon,
+  EditIcon,
+  ExternalLinkIcon,
+} from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { login2, logout2 } from "./../../reducers/login";
+import Logout from "./../Logout";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -37,20 +56,55 @@ export default function Header() {
                     <></>
                   )}
 
-                  <Button
-                    colorScheme="blue"
-                    variant="solid"
-                    onClick={() => {
-                      const data = {
-                        token: "",
-                        role: "",
-                        ID: "",
-                        username: "",
-                      };
-                      dispatch(logout2(data));
-                      navigate("/");
-                    }}
-                  >
+                  <Menu>
+                    <MenuButton
+                      as={IconButton}
+                      aria-label="Options"
+                      icon={<HamburgerIcon />}
+                      variant="outline"
+                    />
+                    <MenuList>
+                      <MenuItem
+                        icon={<AddIcon />}
+                        command="⌘T"
+                        onClick={() => navigate("/UserInfo")}
+                      >
+                        معلوماتي
+                      </MenuItem>
+                      <MenuItem
+                        icon={<ExternalLinkIcon />}
+                        command="⌘N"
+                        onClick={() => navigate("/MyOrders")}
+                      >
+                        طلباتي
+                      </MenuItem>
+                      <MenuItem
+                        icon={<RepeatIcon />}
+                        command="⌘⇧N"
+                        onClick={() => navigate("/MyFav")}
+                      >
+                        مفضلاتي
+                      </MenuItem>
+                      <MenuItem
+                        icon={<EditIcon />}
+                        command="⌘O"
+                        onClick={() => {
+                          const data = {
+                            token: "",
+                            role: "",
+                            ID: "",
+                            username: "",
+                          };
+                          dispatch(logout2(data));
+                          navigate("/");
+                        }}
+                      >
+                        تسجيل الخروج
+                      </MenuItem>
+                    </MenuList>
+                  </Menu>
+
+                  <Button colorScheme="blue" variant="solid" onClick={() => {}}>
                     تسجيل الخروج
                   </Button>
                 </>

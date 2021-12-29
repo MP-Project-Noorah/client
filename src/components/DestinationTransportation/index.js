@@ -11,7 +11,7 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 
-export default function DestinationTransportation() {
+export default function DestinationTransportation({ city }) {
   const [transportations, setTransportations] = useState([]);
   const [transportation, setTransportation] = useState("");
   useEffect(() => {
@@ -21,11 +21,11 @@ export default function DestinationTransportation() {
   const getAllItemsByCity = async () => {
     try {
       const result = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/transportation/getByCity/${"القصيم"}`
+        `${process.env.REACT_APP_BASE_URL}/transportation/getByCity/${city}`
       );
 
       setTransportations(result.data);
-      console.log(result.data);
+      //console.log(result.data);
     } catch (err) {
       console.log(err);
     }
@@ -38,7 +38,7 @@ export default function DestinationTransportation() {
       );
 
       setTransportation(result.data);
-      console.log(result.data);
+      //console.log(result.data);
     } catch (err) {
       console.log(err);
     }
@@ -46,6 +46,7 @@ export default function DestinationTransportation() {
 
   return (
     <div>
+      <h1>المواصلات</h1>
       <Select
         placeholder="الكل"
         onChange={(e) => {
@@ -53,11 +54,10 @@ export default function DestinationTransportation() {
         }}
       >
         {transportations.map((item) => {
-          console.log(item.avter);
           return (
             <>
               <option value={item._id}>
-                {item.fname} {item.lname}
+                {item.companyName} {item.carType}
               </option>
             </>
           );

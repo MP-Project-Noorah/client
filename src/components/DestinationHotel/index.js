@@ -10,7 +10,7 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 
-export default function DestinationHotel() {
+export default function DestinationHotel({ city }) {
   const [hotels, setHotels] = useState([]);
   const [hotel, setHotel] = useState("");
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function DestinationHotel() {
   const getAllItemsByCity = async () => {
     try {
       const result = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/hotels/getByCity/${"بريدة"}`
+        `${process.env.REACT_APP_BASE_URL}/hotels/getByCity/${city}`
       );
 
       setHotels(result.data);

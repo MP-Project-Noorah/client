@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { Search2Icon, StarIcon } from "@chakra-ui/icons";
 import {
   Grid,
   GridItem,
@@ -17,10 +20,27 @@ import {
   Button,
   Spacer,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
-import { Search2Icon, StarIcon } from "@chakra-ui/icons";
+
 export default function Destinations() {
   const navigate = useNavigate();
+
+  const [destinations, setDestinations] = useState([]);
+  useEffect(() => {
+    getAllItems();
+  }, []);
+
+  const getAllItems = async () => {
+    try {
+      const result = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/destinations/get`
+      );
+
+      setDestinations(result.data);
+      console.log(result.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const property = {
     imageUrl: "https://bit.ly/2Z4KKcF",
@@ -102,54 +122,61 @@ export default function Destinations() {
 
         <GridItem colSpan={4} rowSpan={1}>
           <Grid templateColumns="repeat(3, 1fr)" margin="7%" gap={4}>
-            <GridItem>
-              <Box borderWidth="1px">
-                <Image src={property.imageUrl} alt={property.imageAlt} />
-                <Box p="1.5">
-                  <Box display="flex">
-                    <Badge borderRadius="full" px="2" colorScheme="teal">
-                      جديد
-                    </Badge>
-                    <Box
-                      color="gray.500"
-                      fontWeight="semibold"
-                      letterSpacing="wide"
-                      fontSize="xs"
-                      textTransform="uppercase"
-                      ml="2"
-                    >
-                      التصنيف &bull; مناسب للعائلة
+            {destinations.map((item) => {
+              return (
+                <GridItem>
+                  <Box borderWidth="1px">
+                    <Image src={item.image} alt={item.name} />
+                    <Box p="1.5">
+                      <Box display="flex">
+                        <Badge borderRadius="full" px="2" colorScheme="teal">
+                          جديد
+                        </Badge>
+                        <Box
+                          color="gray.500"
+                          fontWeight="semibold"
+                          letterSpacing="wide"
+                          fontSize="xs"
+                          textTransform="uppercase"
+                          ml="2"
+                        >
+                          {item.catg} &bull; مناسب للعائلة
+                        </Box>
+                      </Box>
+                      <Box>
+                        {" "}
+                        {item.name} ({item.city})
+                      </Box>
+                      <Box>الأسعار تبدأ من : 3000 ريال</Box>
+
+                      <Box display="flex" mt="2" alignItems="center">
+                        {Array(5)
+                          .fill("")
+                          .map((_, i) => (
+                            <StarIcon
+                              key={i}
+                              color={i < item.reviews ? "teal.500" : "gray.300"}
+                            />
+                          ))}
+                        <Box as="span" ml="2" color="gray.600" fontSize="sm">
+                          {property.reviewCount} مراجعة
+                        </Box>
+
+                        <Button
+                          borderRadius="none"
+                          onClick={() => {
+                            console.log("ndn nvf");
+                            navigate(`/destinations/${item.city}/${item._id}`);
+                          }}
+                        >
+                          احجز الآن
+                        </Button>
+                      </Box>
                     </Box>
                   </Box>
-                  <Box> اسم الفعالية (المدينة)</Box>
-                  <Box>الأسعار تبدأ من : 3000 ريال</Box>
-
-                  <Box display="flex" mt="2" alignItems="center">
-                    {Array(5)
-                      .fill("")
-                      .map((_, i) => (
-                        <StarIcon
-                          key={i}
-                          color={i < property.rating ? "teal.500" : "gray.300"}
-                        />
-                      ))}
-                    <Box as="span" ml="2" color="gray.600" fontSize="sm">
-                      {property.reviewCount} مراجعة
-                    </Box>
-
-                    <Button
-                      borderRadius="none"
-                      onClick={() => {
-                        console.log("ndn nvf");
-                        navigate(`/destinations/${1}`);
-                      }}
-                    >
-                      احجز الآن
-                    </Button>
-                  </Box>
-                </Box>
-              </Box>
-            </GridItem>
+                </GridItem>
+              );
+            })}
           </Grid>
         </GridItem>
       </Grid>

@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Destinations from "./components/Destinations";
 import DestinationInfo from "./components/DestinationInfo";
 import DayInYourCity from "./components/DayInYourCity";
+import DayInYourCityInfo from "./components/DayInYourCityInfo";
 import UserDestinations from "./components/UserDestinations";
 import TravelTips from "./components/TravelTips";
 import Signup from "./components/Signup";
@@ -18,8 +19,17 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/destinations" element={<Destinations />} />
-        <Route exact path="/destinations/:id" element={<DestinationInfo />} />
+        <Route
+          exact
+          path="/destinations/:city/:id"
+          element={<DestinationInfo />}
+        />
         <Route exact path="/dayInYourCity" element={<DayInYourCity />} />
+        <Route
+          exact
+          path="/dayInYourCity/:id"
+          element={<DayInYourCityInfo />}
+        />
         <Route exact path="/userDestinations" element={<UserDestinations />} />
         <Route exact path="/travelTips" element={<TravelTips />} />
         <Route exact path="/signup" element={<Signup />} />

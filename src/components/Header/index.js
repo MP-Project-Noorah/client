@@ -1,6 +1,24 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Flex, Spacer, Box, Button, HStack } from "@chakra-ui/react";
+import {
+  Flex,
+  Spacer,
+  Box,
+  Button,
+  HStack,
+  MenuList,
+  MenuItem,
+  Menu,
+  MenuButton,
+  IconButton,
+} from "@chakra-ui/react";
+import {
+  HamburgerIcon,
+  AddIcon,
+  RepeatIcon,
+  EditIcon,
+  ExternalLinkIcon,
+} from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { login2, logout2 } from "./../../reducers/login";
 
@@ -36,6 +54,29 @@ export default function Header() {
                   ) : (
                     <></>
                   )}
+
+                  <Menu>
+                    <MenuButton
+                      as={IconButton}
+                      aria-label="Options"
+                      icon={<HamburgerIcon />}
+                      variant="outline"
+                    />
+                    <MenuList>
+                      <MenuItem icon={<AddIcon />} command="⌘T">
+                        New Tab
+                      </MenuItem>
+                      <MenuItem icon={<ExternalLinkIcon />} command="⌘N">
+                        New Window
+                      </MenuItem>
+                      <MenuItem icon={<RepeatIcon />} command="⌘⇧N">
+                        Open Closed Tab
+                      </MenuItem>
+                      <MenuItem icon={<EditIcon />} command="⌘O">
+                        Open File...
+                      </MenuItem>
+                    </MenuList>
+                  </Menu>
 
                   <Button
                     colorScheme="blue"

@@ -5,7 +5,7 @@ import Destinations from "./components/Destinations";
 import DestinationInfo from "./components/DestinationInfo";
 import DayInYourCity from "./components/DayInYourCity";
 import DayInYourCityInfo from "./components/DayInYourCityInfo";
-import UserDestinations from "./components/UserDestinations";
+import PlanYourTrip from "./components/PlanYourTrip";
 import TravelTips from "./components/TravelTips";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
@@ -15,6 +15,7 @@ import CompleteResetPassword from "./components/CompleteResetPassword";
 import UserInfo from "./components/UserInfo";
 import MyFav from "./components/MyFav";
 import MyOrders from "./components/MyOrders";
+import Footer from "./components/Footer";
 function App() {
   return (
     <>
@@ -36,7 +37,7 @@ function App() {
           path="/dayInYourCity/:id"
           element={<DayInYourCityInfo />}
         />
-        <Route exact path="/userDestinations" element={<UserDestinations />} />
+        <Route exact path="/PlanYourTrip" element={<PlanYourTrip />} />
         <Route exact path="/travelTips" element={<TravelTips />} />
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/login" element={<Login />} />
@@ -50,6 +51,7 @@ function App() {
 
         <Route path="*" element={<h1> 404 </h1>} />
       </Routes>
+      <Footer />
     </>
   );
 }

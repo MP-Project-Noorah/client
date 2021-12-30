@@ -7,8 +7,29 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ChakraProvider } from "@chakra-ui/react";
 import store from "./reducers";
+import { extendTheme } from "@chakra-ui/react";
+
+const theme = extendTheme({
+  styles: {
+    global: {
+      // styles for the `body`
+      body: {
+        bg: "#e5e5e5",
+        // color: "white",
+      },
+      // styles for the `a`
+      // a: {
+      //   color: "teal.500",
+      //   _hover: {
+      //     textDecoration: "underline",
+      //   },
+      // },
+    },
+  },
+});
+
 ReactDOM.render(
-  <ChakraProvider>
+  <ChakraProvider theme={theme}>
     <Provider store={store}>
       <BrowserRouter>
         <App />

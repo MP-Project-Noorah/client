@@ -20,11 +20,17 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { Search2Icon, StarIcon } from "@chakra-ui/icons";
+import FavIcon from "../FavIcon";
+import Card from "../Card";
 export default function DayInYourCity() {
   const navigate = useNavigate();
 
   const [dayInYourCity, setDayInYourCity] = useState([]);
+  const [user, setUser] = useState("");
+  const [select, setSelect] = useState(2);
+  const [id, setId] = useState(localStorage.getItem("ID"));
   useEffect(() => {
+    getUserItem();
     getAllItems();
   }, []);
 
@@ -35,21 +41,23 @@ export default function DayInYourCity() {
       );
 
       setDayInYourCity(result.data);
-      console.log(result.data);
+      //console.log(result.data);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const property = {
-    imageUrl: "https://bit.ly/2Z4KKcF",
-    imageAlt: "Rear view of modern home with pool",
-    beds: 3,
-    baths: 2,
-    title: "Modern home in city center in the heart of historic Los Angeles",
-    formattedPrice: "$1,900.00",
-    reviewCount: 34,
-    rating: 4,
+  const getUserItem = async () => {
+    try {
+      const result = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/users/get/${id}`
+      );
+
+      setUser(result.data);
+      //console.log(result.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -121,56 +129,18 @@ export default function DayInYourCity() {
           <Grid templateColumns="repeat(3, 1fr)" margin="7%" gap={4}>
             {dayInYourCity.map((item) => {
               return (
-                <GridItem>
-                  <Box borderWidth="1px">
-                    <Image src={item.images[0]} alt={item.name} />
-                    <Box p="1.5">
-                      <Box display="flex">
-                        <Badge borderRadius="full" px="2" colorScheme="teal">
-                          جديد
-                        </Badge>
-                        <Box
-                          color="gray.500"
-                          fontWeight="semibold"
-                          letterSpacing="wide"
-                          fontSize="xs"
-                          textTransform="uppercase"
-                          ml="2"
-                        >
-                          {item.catg} &bull; مناسب للعائلة
-                        </Box>
-                      </Box>
-                      <Box>
-                        {" "}
-                        {item.name} ({item.city})
-                      </Box>
-                      <Box>الأسعار تبدأ من : 3000 ريال</Box>
-
-                      <Box display="flex" mt="2" alignItems="center">
-                        {Array(5)
-                          .fill("")
-                          .map((_, i) => (
-                            <StarIcon
-                              key={i}
-                              color={i < item.reviews ? "teal.500" : "gray.300"}
-                            />
-                          ))}
-                        <Box as="span" ml="2" color="gray.600" fontSize="sm">
-                          {property.reviewCount} مراجعة
-                        </Box>
-
-                        <Button
-                          borderRadius="none"
-                          onClick={() => {
-                            navigate(`/dayInYourCity/${item._id}`);
-                          }}
-                        >
-                          احجز الآن
-                        </Button>
-                      </Box>
-                    </Box>
-                  </Box>
-                </GridItem>
+                <Card
+                  id={item._id}
+                  catg={item.catg}
+                  name={item.name}
+                  city={item.city}
+                  reviews={item.reviews}
+                  image={item.images[0]}
+                  getAllItems={getAllItems}
+                  getUserItem={getUserItem}
+                  user={user}
+                  select={select}
+                />
               );
             })}
           </Grid>

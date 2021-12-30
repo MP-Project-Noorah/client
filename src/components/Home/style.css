@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Lemonada&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap");
+
+.home2 {
+  font-family: "Cormorant Garamond";
+  font-size: 200%;
+}
+
+.home1 {
+  font-family: "Lemonada", cursive;
+  font-size: 300%;
+}

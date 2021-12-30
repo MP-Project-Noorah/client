@@ -22,6 +22,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { login2, logout2 } from "./../../reducers/login";
 import Logout from "./../Logout";
+import "./style.css";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -34,9 +35,16 @@ export default function Header() {
         fontWeight="semibold"
         borderColor="#ccd0d5"
         padding="1%"
+        position="fixed"
+        top="0"
+        w="100%"
+        bg="#FFFFF7"
+        opacity=".9"
       >
         <Flex>
-          <Box>وجهتي</Box>
+          <Box>
+            <span className="logo">وجهتي</span>
+          </Box>
           <Spacer />
 
           <Box display="flex" justifyContent="space-between">
@@ -44,7 +52,7 @@ export default function Header() {
               <Link to="/"> الرئيسية </Link>
               <Link to="/destinations"> الوجهات </Link>
               <Link to="/dayInYourCity"> يوم في مدينتك </Link>
-              <Link to="/userDestinations"> وجهات المستخدمين </Link>
+              <Link to="/PlanYourTrip">خطط لرحلتك</Link>
               <Link to="/travelTips"> ارشادات السفر </Link>
 
               {localStorage.getItem("ID") ? (
@@ -103,21 +111,20 @@ export default function Header() {
                       </MenuItem>
                     </MenuList>
                   </Menu>
-
-                  <Button colorScheme="blue" variant="solid" onClick={() => {}}>
-                    تسجيل الخروج
-                  </Button>
                 </>
               ) : (
                 <>
                   <Button
-                    colorScheme="blue"
+                    bg="#7294BD"
+                    color="white"
+                    borderRadius="none"
                     variant="solid"
                     onClick={() => navigate("/login")}
                   >
                     تسجيل الدخول
                   </Button>
                   <Button
+                    borderRadius="none"
                     colorScheme="blue"
                     variant="outline"
                     onClick={() => navigate("/signup")}

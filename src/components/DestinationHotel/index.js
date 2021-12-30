@@ -24,7 +24,7 @@ export default function DestinationHotel({ city }) {
       );
 
       setHotels(result.data);
-      console.log(result.data);
+      console.log(city);
     } catch (err) {
       console.log(err);
     }
@@ -37,7 +37,7 @@ export default function DestinationHotel({ city }) {
       );
 
       setHotel(result.data);
-      console.log(result.data);
+      //console.log(result.data);
     } catch (err) {
       console.log(err);
     }
@@ -47,7 +47,7 @@ export default function DestinationHotel({ city }) {
     if (val == 1) {
       let arr = [...hotels];
       for (let i = 0; i < arr.length; i++) {
-        console.log(arr[i].hotelInfo[0].price);
+        //console.log(arr[i].hotelInfo[0].price);
         let price1 =
           (arr[i].hotelInfo[0].price + arr[i].hotelInfo[1].price) / 2;
         for (let j = i + 1; j < arr.length; j++) {
@@ -64,7 +64,7 @@ export default function DestinationHotel({ city }) {
     } else if (val == 2) {
       let arr = [...hotels];
       for (let i = 0; i < arr.length; i++) {
-        console.log(arr[i].hotelInfo[0].price);
+        //console.log(arr[i].hotelInfo[0].price);
         let price1 =
           (arr[i].hotelInfo[0].price + arr[i].hotelInfo[1].price) / 2;
         for (let j = i + 1; j < arr.length; j++) {
@@ -81,7 +81,7 @@ export default function DestinationHotel({ city }) {
     } else if (val == 3) {
       let arr = [...hotels];
       for (let i = 0; i < arr.length; i++) {
-        console.log(arr[i].hotelInfo[0].price);
+        // console.log(arr[i].hotelInfo[0].price);
 
         for (let j = i + 1; j < arr.length; j++) {
           if (arr[i].reviews > arr[j].reviews) {
@@ -95,7 +95,7 @@ export default function DestinationHotel({ city }) {
     } else if (val == 4) {
       let arr = [...hotels];
       for (let i = 0; i < arr.length; i++) {
-        console.log(arr[i].hotelInfo[0].price);
+        //console.log(arr[i].hotelInfo[0].price);
 
         for (let j = i + 1; j < arr.length; j++) {
           if (arr[i].reviews < arr[j].reviews) {

@@ -15,6 +15,9 @@ import {
   Image,
   Heading,
   Text,
+  Center,
+  Grid,
+  GridItem,
 } from "@chakra-ui/react";
 import DestinationHotel from "./../DestinationHotel";
 import DestinationTouristGuides from "./../DestinationTouristGuides";
@@ -23,6 +26,7 @@ import DestinationFlights from "./../DestinationFlights";
 import DestinationCost from "./../DestinationCost";
 import Comments from "./../Comments";
 import { useParams } from "react-router-dom";
+import CardInHome from "../CardInHome";
 
 //import { AccordionIcon } from "@chakra-ui/icons";
 
@@ -41,7 +45,7 @@ export default function DestinationInfo() {
       );
 
       setDestination(result.data);
-      console.log(result.data);
+      //console.log(result.data);
     } catch (err) {
       console.log(err);
     }
@@ -58,7 +62,36 @@ export default function DestinationInfo() {
         </TabList>
         <TabPanels>
           <TabPanel>
-            {destination.result ? <p>{destination.result.desc}</p> : <></>}
+            {destination.result ? (
+              <Center>
+                <Grid
+                  marginTop="10%"
+                  w="90%"
+                  templateRows="repeat(1, 1fr)"
+                  templateColumns="repeat(2, 1fr)"
+                  shadow="md"
+                  borderWidth="1px"
+                  padding="3"
+                  bg="white"
+                >
+                  <GridItem colSpan={1}>
+                    <Image
+                      src={destination.result.image}
+                      alt="wjhat"
+                      w="100%"
+                    />
+                  </GridItem>
+                  <GridItem colSpan={1}>
+                    <Box p={7}>
+                      <Heading fontSize="xl">{destination.result.name}</Heading>
+                      <Text mt={4}>{destination.result.desc}</Text>
+                    </Box>
+                  </GridItem>
+                </Grid>
+              </Center>
+            ) : (
+              <></>
+            )}
           </TabPanel>
           <TabPanel>
             {destination.festivals ? (
@@ -75,11 +108,18 @@ export default function DestinationInfo() {
                         </AccordionButton>
                       </h2>
                       <AccordionPanel pb={4}>
-                        <Image src={item.imge} alt={item.name} />
+                        <CardInHome
+                          name={item.name}
+                          text={item.desc}
+                          image={item.imge}
+                          link={item.map}
+                        />
+
+                        {/* <Image src={item.imge} alt={item.name} />
                         <Heading> {item.name}</Heading>
                         <Text>{item.desc}</Text>
                         <h1>{item.cost}</h1>
-                        <h1>{item.map}</h1>
+                        <h1>{item.map}</h1> */}
                       </AccordionPanel>
                     </AccordionItem>
                   );
@@ -90,11 +130,13 @@ export default function DestinationInfo() {
             )}
           </TabPanel>
           <TabPanel>
-            <DestinationHotel />
+            <DestinationHotel city={city} />
           </TabPanel>
 
           <TabPanel>
-            <DestinationTouristGuides city={city} />
+            <DestinationTouristGuides
+              city={city === "بريدة" ? "القصيم" : city}
+            />
             <DestinationTransportation city={city} />
             <DestinationFlights city={city} />
             <DestinationCost city={city} />

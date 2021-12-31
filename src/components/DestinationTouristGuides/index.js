@@ -10,10 +10,23 @@ import {
   Box,
   Textarea,
 } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  hotelRedux,
+  transportationRedux,
+  flightRedux,
+  touristGuideRedux,
+  destinationRedux,
+} from "./../../reducers/order";
 
 export default function DestinationTouristGuides({ city }) {
   const [touristGuides, setTouristGuides] = useState([]);
   const [touristGuide, setTouristGuide] = useState("");
+  const dispatch = useDispatch();
+
+  const state = useSelector((state) => {
+    return state;
+  });
   useEffect(() => {
     getAllItemsByCity();
   }, []);
@@ -35,6 +48,11 @@ export default function DestinationTouristGuides({ city }) {
       const result = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/touristGuides/get/${id}`
       );
+
+      const data = {
+        touristGuide: result.data,
+      };
+      dispatch(touristGuideRedux(data));
 
       setTouristGuide(result.data);
     } catch (err) {

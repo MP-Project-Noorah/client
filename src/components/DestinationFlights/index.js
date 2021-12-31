@@ -10,10 +10,23 @@ import {
   Box,
   Textarea,
 } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  hotelRedux,
+  transportationRedux,
+  flightRedux,
+  touristGuideRedux,
+  destinationRedux,
+} from "./../../reducers/order";
 
 export default function DestinationFlights({ city }) {
   const [flights, setFlights] = useState([]);
   const [flight, setFlight] = useState("");
+  const dispatch = useDispatch();
+
+  const state = useSelector((state) => {
+    return state;
+  });
 
   useEffect(() => {
     getAllItemsByCity();
@@ -28,7 +41,8 @@ export default function DestinationFlights({ city }) {
       );
 
       setFlights(result.data);
-      console.log(result.data);
+
+      // console.log(state.setOrder.flight);
     } catch (err) {
       console.log(err);
     }
@@ -41,7 +55,13 @@ export default function DestinationFlights({ city }) {
       );
 
       setFlight(result.data);
-      console.log(result.data);
+      const data = {
+        flight: result.data,
+      };
+      dispatch(flightRedux(data));
+
+      //console.log(state.setOrder.flight);
+      //console.log(result.data);
     } catch (err) {
       console.log(err);
     }
@@ -60,7 +80,7 @@ export default function DestinationFlights({ city }) {
           return (
             <>
               <option value={item._id}>
-                {item.fname} {item.lname}
+                {item.from} {item.to} {item.flightClass}
               </option>
             </>
           );

@@ -27,15 +27,36 @@ import DestinationCost from "./../DestinationCost";
 import Comments from "./../Comments";
 import { useParams } from "react-router-dom";
 import CardInHome from "../CardInHome";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  hotelRedux,
+  transportationRedux,
+  flightRedux,
+  touristGuideRedux,
+  destinationRedux,
+} from "./../../reducers/order";
 
 //import { AccordionIcon } from "@chakra-ui/icons";
 
 export default function DestinationInfo() {
   const { id, city } = useParams();
+  const dispatch = useDispatch();
+
+  const state = useSelector((state) => {
+    return state;
+  });
 
   const [destination, setDestination] = useState({});
   useEffect(() => {
     getItem();
+
+    const data = {
+      destination,
+    };
+
+    dispatch(destinationRedux(data));
+
+    //console.log(state.setOrder.destination);
   }, []);
 
   const getItem = async () => {
@@ -57,7 +78,6 @@ export default function DestinationInfo() {
         <TabList>
           <Tab>عن الرحلة</Tab>
           <Tab>خطة الوجهة</Tab>
-          <Tab>الفندق</Tab>
           <Tab>الحجز</Tab>
         </TabList>
         <TabPanels>
@@ -129,18 +149,16 @@ export default function DestinationInfo() {
               <></>
             )}
           </TabPanel>
-          <TabPanel>
-            <DestinationHotel city={city} />
-          </TabPanel>
 
           <TabPanel>
+            <DestinationHotel city={city} />
             <DestinationTouristGuides
               city={city === "بريدة" ? "القصيم" : city}
             />
             <DestinationTransportation city={city} />
             <DestinationFlights city={city} />
-            <DestinationCost city={city} />
             <p>التكلفة الكلية</p>
+            <DestinationCost city={city} />
           </TabPanel>
         </TabPanels>
       </Tabs>

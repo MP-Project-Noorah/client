@@ -9,10 +9,23 @@ import {
   Box,
   Textarea,
 } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  hotelRedux,
+  transportationRedux,
+  flightRedux,
+  touristGuideRedux,
+  destinationRedux,
+} from "./../../reducers/order";
 
 export default function DestinationHotel({ city }) {
   const [hotels, setHotels] = useState([]);
   const [hotel, setHotel] = useState("");
+
+  const dispatch = useDispatch();
+  const state = useSelector((state) => {
+    return state;
+  });
   useEffect(() => {
     getAllItemsByCity();
   }, []);
@@ -24,7 +37,7 @@ export default function DestinationHotel({ city }) {
       );
 
       setHotels(result.data);
-      console.log(city);
+      //console.log(city);
     } catch (err) {
       console.log(err);
     }
@@ -37,6 +50,11 @@ export default function DestinationHotel({ city }) {
       );
 
       setHotel(result.data);
+      const data = {
+        hotel: result.data,
+      };
+      dispatch(hotelRedux(data));
+      //console.log(state.setOrder.hotel);
       //console.log(result.data);
     } catch (err) {
       console.log(err);

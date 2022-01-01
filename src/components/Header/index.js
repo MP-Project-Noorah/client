@@ -36,17 +36,15 @@ export default function Header() {
         borderColor="#ccd0d5"
         padding="1%"
         position="fixed"
+        zIndex="1"
         top="0"
         w="100%"
         bg="#FFFFF7"
         opacity=".9"
       >
         <Flex>
-          <Box>
-            <span className="logo">وجهتي</span>
-          </Box>
+          <span className="logo">وجهتي</span>
           <Spacer />
-
           <Box display="flex" justifyContent="space-between">
             <HStack spacing="24px">
               <Link to="/"> الرئيسية </Link>
@@ -135,6 +133,16 @@ export default function Header() {
               )}
             </HStack>
           </Box>
+          {/* 
+          <Box
+            h="150px"
+            w="8%"
+            bg="black"
+            opacity=".1"
+            position="fixed"
+            zIndex="1"
+            marginRight="3%"
+          ></Box> */}
         </Flex>
       </Box>
     </div>

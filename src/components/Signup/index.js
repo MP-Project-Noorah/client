@@ -42,15 +42,7 @@ export default function Signup({ adminRole }) {
 
   return (
     <div>
-      <Box
-        w="30%"
-        margin="auto"
-        marginTop="5%"
-        borderRadius="md"
-        border="1px"
-        borderColor="#ccd0d5"
-        padding="50"
-      >
+      <Box>
         <Heading fontSize="l" marginTop="3%">
           الإيميل:
         </Heading>

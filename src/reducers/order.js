@@ -1,4 +1,6 @@
 const instialState = {
+  city: "",
+  numOfDays: "",
   hotel: "",
   destination: "",
   touristGuide: "",
@@ -13,6 +15,12 @@ const setOrder = (state = instialState, action) => {
     case "SETHOTEL":
       const { hotel } = payload;
       return { ...state, hotel };
+    case "SETCITY":
+      const { city } = payload;
+      return { ...state, city };
+    case "SETNUMOFDAYS":
+      const { numOfDays } = payload;
+      return { ...state, numOfDays };
     case "SETDESTINATION":
       const { destination } = payload;
       return { ...state, destination };
@@ -32,6 +40,19 @@ const setOrder = (state = instialState, action) => {
 };
 
 export default setOrder;
+
+export const cityRedux = (data) => {
+  return {
+    type: "SETCITY",
+    payload: data,
+  };
+};
+export const numOfDaysRedux = (data) => {
+  return {
+    type: "SETNUMOFDAYS",
+    payload: data,
+  };
+};
 
 export const hotelRedux = (data) => {
   return {

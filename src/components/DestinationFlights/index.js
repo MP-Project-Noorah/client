@@ -9,6 +9,14 @@ import {
   Button,
   Box,
   Textarea,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -20,6 +28,7 @@ import {
 } from "./../../reducers/order";
 
 export default function DestinationFlights({ city }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [flights, setFlights] = useState([]);
   const [flight, setFlight] = useState("");
   const dispatch = useDispatch();
@@ -35,9 +44,7 @@ export default function DestinationFlights({ city }) {
   const getAllItemsByCity = async () => {
     try {
       const result = await axios.get(
-        `${
-          process.env.REACT_APP_BASE_URL
-        }/flights/getByCity/${city}/${"الرياض"}`
+        `${process.env.REACT_APP_BASE_URL}/flights/getByCity/${city}`
       );
 
       setFlights(result.data);
@@ -69,36 +76,55 @@ export default function DestinationFlights({ city }) {
 
   return (
     <div>
-      <h1>الحجوزات</h1>
-      <Select
-        placeholder="الكل"
-        onChange={(e) => {
-          if (e.target.value) selectFlightFun(e.target.value);
-        }}
+      <Button onClick={onOpen}>تذاكر الطيران</Button>
+      <Modal
+        isCentered
+        onClose={onClose}
+        isOpen={isOpen}
+        motionPreset="slideInBottom"
       >
-        {flights.map((item) => {
-          return (
-            <>
-              <option value={item._id}>
-                {item.from} {item.to} {item.flightClass}
-              </option>
-            </>
-          );
-        })}
-      </Select>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>تذاكر الطيران</ModalHeader>
+          <ModalCloseButton marginRight="90%" />
+          <ModalBody>
+            <Select
+              placeholder="الكل"
+              onChange={(e) => {
+                if (e.target.value) selectFlightFun(e.target.value);
+              }}
+            >
+              {flights.map((item) => {
+                return (
+                  <>
+                    <option value={item._id}>
+                      {item.from} الى {item.to}. نوع التذكرة:{item.flightClass}
+                    </option>
+                  </>
+                );
+              })}
+            </Select>
 
-      {flight ? (
-        <>
-          <h1>{flight.from}</h1>
-          <h1>{flight.to}</h1>
-          <h1>{flight.flightClass}</h1>
-          <h1>{flight.adultTicketPrice}</h1>
-          <h1>{flight.childTicketPrice}</h1>
-          <h1>{flight.infantTicketPrice}</h1>
-        </>
-      ) : (
-        <></>
-      )}
+            {flight ? (
+              <>
+                <h1>{flight.from}</h1>
+                <h1>{flight.to}</h1>
+                <h1>{flight.flightClass}</h1>
+                <h1>{flight.adultTicketPrice}</h1>
+                <h1>{flight.childTicketPrice}</h1>
+                <h1>{flight.infantTicketPrice}</h1>
+              </>
+            ) : (
+              <></>
+            )}
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              إغلاق
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 }

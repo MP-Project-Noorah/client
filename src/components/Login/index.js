@@ -51,15 +51,7 @@ export default function Login() {
 
   return (
     <div>
-      <Box
-        w="30%"
-        margin="auto"
-        marginTop="5%"
-        borderRadius="md"
-        border="1px"
-        borderColor="#ccd0d5"
-        padding="50"
-      >
+      <Box>
         <Heading fontSize="l" marginTop="3%">
           الإيميل:
         </Heading>
@@ -90,11 +82,14 @@ export default function Login() {
         </InputGroup>
 
         <Heading fontSize="l" marginTop="3%">
-          هل نسيت كلمة المرور؟ <Link to="/resetPass">اضغط هنا</Link>
+          هل نسيت كلمة المرور؟{" "}
+          <span style={{ color: "#7294BD" }}>
+            <Link to="/resetPass">اضغط هنا</Link>
+          </span>
         </Heading>
 
         <Button marginTop="13%" w="100%" onClick={() => login()}>
-          التسجيل
+          تسجيل الدخول
         </Button>
       </Box>
     </div>

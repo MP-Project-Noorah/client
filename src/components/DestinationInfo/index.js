@@ -24,6 +24,7 @@ import DestinationTouristGuides from "./../DestinationTouristGuides";
 import DestinationTransportation from "./../DestinationTransportation";
 import DestinationFlights from "./../DestinationFlights";
 import DestinationCost from "./../DestinationCost";
+import ItemCard from "./../ItemCard";
 import Comments from "./../Comments";
 import { useParams } from "react-router-dom";
 import CardInHome from "../CardInHome";
@@ -56,8 +57,18 @@ export default function DestinationInfo() {
 
     dispatch(destinationRedux(data));
 
-    //console.log(state.setOrder.destination);
+    console.log(state.setOrder.destination);
   }, []);
+
+  useEffect(() => {
+    const data = {
+      destination,
+    };
+
+    dispatch(destinationRedux(data));
+
+    console.log(state.setOrder);
+  }, [destination]);
 
   const getItem = async () => {
     try {
@@ -74,7 +85,7 @@ export default function DestinationInfo() {
 
   return (
     <div>
-      <Tabs variant="enclosed" margin="5%">
+      <Tabs variant="enclosed" margin="10%" bg="white">
         <TabList>
           <Tab>عن الرحلة</Tab>
           <Tab>خطة الوجهة</Tab>
@@ -83,32 +94,38 @@ export default function DestinationInfo() {
         <TabPanels>
           <TabPanel>
             {destination.result ? (
-              <Center>
-                <Grid
-                  marginTop="10%"
-                  w="90%"
-                  templateRows="repeat(1, 1fr)"
-                  templateColumns="repeat(2, 1fr)"
-                  shadow="md"
-                  borderWidth="1px"
-                  padding="3"
-                  bg="white"
-                >
-                  <GridItem colSpan={1}>
-                    <Image
-                      src={destination.result.image}
-                      alt="wjhat"
-                      w="100%"
-                    />
-                  </GridItem>
-                  <GridItem colSpan={1}>
-                    <Box p={7}>
-                      <Heading fontSize="xl">{destination.result.name}</Heading>
-                      <Text mt={4}>{destination.result.desc}</Text>
-                    </Box>
-                  </GridItem>
-                </Grid>
-              </Center>
+              // <Center>
+              //   <Grid
+              //     marginTop="10%"
+              //     w="90%"
+              //     templateRows="repeat(1, 1fr)"
+              //     templateColumns="repeat(2, 1fr)"
+              //     shadow="md"
+              //     borderWidth="1px"
+              //     padding="3"
+              //     bg="white"
+              //   >
+              //     <GridItem colSpan={1}>
+              //       <Image
+              //         src={destination.result.image}
+              //         alt="wjhat"
+              //         w="100%"
+              //       />
+              //     </GridItem>
+              //     <GridItem colSpan={1}>
+              //       <Box p={7}>
+              //         <Heading fontSize="xl">{destination.result.name}</Heading>
+              //         <Text mt={4}>{destination.result.desc}</Text>
+              //       </Box>
+              //     </GridItem>
+              //   </Grid>
+              // </Center>
+
+              <ItemCard
+                images={destination.result.image}
+                name={destination.result.name}
+                desc={destination.result.desc}
+              />
             ) : (
               <></>
             )}
@@ -128,12 +145,17 @@ export default function DestinationInfo() {
                         </AccordionButton>
                       </h2>
                       <AccordionPanel pb={4}>
-                        <CardInHome
+                        <ItemCard
+                          images={item.imge}
+                          name={item.name}
+                          desc={item.desc}
+                        />
+                        {/* <CardInHome
                           name={item.name}
                           text={item.desc}
                           image={item.imge}
                           link={item.map}
-                        />
+                        /> */}
 
                         {/* <Image src={item.imge} alt={item.name} />
                         <Heading> {item.name}</Heading>
@@ -162,7 +184,6 @@ export default function DestinationInfo() {
           </TabPanel>
         </TabPanels>
       </Tabs>
-
       <Comments id={id} />
     </div>
   );

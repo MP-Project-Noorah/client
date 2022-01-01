@@ -7,14 +7,11 @@ import DayInYourCity from "./components/DayInYourCity";
 import DayInYourCityInfo from "./components/DayInYourCityInfo";
 import PlanYourTrip from "./components/PlanYourTrip";
 import TravelTips from "./components/TravelTips";
-import Signup from "./components/Signup";
-import Login from "./components/Login";
 import Admin from "./components/Admin";
-import ResetPass from "./components/ResetPass";
-import CompleteResetPassword from "./components/CompleteResetPassword";
 import UserInfo from "./components/UserInfo";
 import MyFav from "./components/MyFav";
 import MyOrders from "./components/MyOrders";
+import LoginSignupDesign from "./components/LoginSignupDesign";
 import Footer from "./components/Footer";
 function App() {
   return (
@@ -39,14 +36,26 @@ function App() {
         />
         <Route exact path="/PlanYourTrip" element={<PlanYourTrip />} />
         <Route exact path="/travelTips" element={<TravelTips />} />
-        <Route exact path="/signup" element={<Signup />} />
-        <Route exact path="/login" element={<Login />} />
+        <Route
+          exact
+          path="/signup"
+          element={<LoginSignupDesign type={"Signup"} />}
+        />
+        <Route
+          exact
+          path="/login"
+          element={<LoginSignupDesign type={"login"} />}
+        />
         <Route exact path="/admin" element={<Admin />} />
-        <Route exact path="/resetPass" element={<ResetPass />} />
+        <Route
+          exact
+          path="/resetPass"
+          element={<LoginSignupDesign type={"ResetPass"} />}
+        />
         <Route
           exact
           path="users/completeResetPassword/:id"
-          element={<CompleteResetPassword />}
+          element={<LoginSignupDesign type={"completeResetPassword"} />}
         />
 
         <Route path="*" element={<h1> 404 </h1>} />

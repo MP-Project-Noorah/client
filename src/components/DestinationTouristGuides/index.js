@@ -9,6 +9,14 @@ import {
   Button,
   Box,
   Textarea,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -20,6 +28,7 @@ import {
 } from "./../../reducers/order";
 
 export default function DestinationTouristGuides({ city }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [touristGuides, setTouristGuides] = useState([]);
   const [touristGuide, setTouristGuide] = useState("");
   const dispatch = useDispatch();
@@ -62,35 +71,58 @@ export default function DestinationTouristGuides({ city }) {
 
   return (
     <div>
-      <h1>المرشد السياحي</h1>
-      <Select
-        placeholder="الكل"
-        onChange={(e) => {
-          if (e.target.value) selectTouristGuideFun(e.target.value);
-        }}
+      <Button onClick={onOpen}>المرشد السياحي</Button>
+      <Modal
+        isCentered
+        onClose={onClose}
+        isOpen={isOpen}
+        motionPreset="slideInBottom"
       >
-        {touristGuides.map((item) => {
-          return (
-            <>
-              <option value={item._id}>
-                {item.fname} {item.lname}
-              </option>
-            </>
-          );
-        })}
-      </Select>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>المرشد السياحي</ModalHeader>
+          <ModalCloseButton marginRight="90%" />
+          <ModalBody>
+            <Select
+              placeholder="الكل"
+              onChange={(e) => {
+                if (e.target.value) selectTouristGuideFun(e.target.value);
+              }}
+            >
+              {touristGuides.map((item) => {
+                return (
+                  <>
+                    <option value={item._id}>
+                      {item.fname} {item.lname}
+                    </option>
+                  </>
+                );
+              })}
+            </Select>
 
-      {touristGuide ? (
-        <>
-          <Avatar size="md" name="Ryan Florence" src={touristGuide.avter} />
-          <h1>{touristGuide.fname}</h1>
-          <h1>{touristGuide.lname}</h1>
-          <h1>{touristGuide.city}</h1>
-          <h1>{touristGuide.mobile}</h1>
-        </>
-      ) : (
-        <></>
-      )}
+            {touristGuide ? (
+              <>
+                <Avatar
+                  size="md"
+                  name="Ryan Florence"
+                  src={touristGuide.avter}
+                />
+                <h1>{touristGuide.fname}</h1>
+                <h1>{touristGuide.lname}</h1>
+                <h1>{touristGuide.city}</h1>
+                <h1>{touristGuide.mobile}</h1>
+              </>
+            ) : (
+              <></>
+            )}
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              إغلاق
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 }

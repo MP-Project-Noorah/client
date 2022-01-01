@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+
 import {
   Grid,
   GridItem,
@@ -17,8 +18,11 @@ import {
   Image,
   Button,
   Spacer,
+  Heading,
+  Text,
+  Center,
 } from "@chakra-ui/react";
-import { Search2Icon, StarIcon } from "@chakra-ui/icons";
+import { Search2Icon, StarIcon, ArrowBackIcon } from "@chakra-ui/icons";
 import FavIcon from "../FavIcon";
 import { useNavigate } from "react-router-dom";
 
@@ -36,64 +40,68 @@ export default function Card({
 }) {
   const navigate = useNavigate();
   return (
-    <GridItem>
-      {/* marginTop="10%" w="70%" templateRows="repeat(1, 1fr)"
-      templateColumns="repeat(2, 1fr)" shadow="md" borderWidth="1px" padding="3"
-      bg="white" */}
-      <Box borderWidth="1px" shadow="md" bg="white">
-        <Image src={image} alt={name} w="100%" h="200px" />
-        <Box p="1.5">
-          <Box display="flex">
-            <Badge borderRadius="full" px="2" colorScheme="teal">
-              جديد
-            </Badge>
-            <Box
-              color="gray.500"
-              fontWeight="semibold"
-              letterSpacing="wide"
-              fontSize="xs"
-              textTransform="uppercase"
-              ml="2"
-            >
-              {catg} &bull; مناسب للعائلة
-            </Box>
-            <FavIcon
-              idPro={id}
-              getAllItems={getAllItems}
-              user={user}
-              getUserItem={getUserItem}
+    <GridItem
+      w="100%"
+      h="500"
+      backgroundImage={`url("${image}")`}
+      backgroundPosition="center"
+      backgroundRepeat="no-repeat"
+      backgroundSize="cover"
+    >
+      <Button
+        rightIcon={<ArrowBackIcon />}
+        bg="#666699"
+        padding="1%"
+        color="black"
+        onClick={() => {
+          if (select === 1) navigate(`/destinations/${city}/${id}`);
+          else navigate(`/dayInYourCity/${id}`);
+        }}
+      ></Button>
+      <Box
+        w="72%"
+        h="30%"
+        bg="rgba(102, 102, 153, 0.8)"
+        marginTop="50%"
+        marginRight="27%"
+        color="white"
+        textAlign="center"
+      >
+        <Heading fontSize="100%">
+          <FavIcon
+            idPro={id}
+            getAllItems={getAllItems}
+            user={user}
+            getUserItem={getUserItem}
+          />
+          {catg}{" "}
+        </Heading>
+
+        <Heading fontSize="100%">{name}</Heading>
+        <Text>{city}</Text>
+        {/* <Text fontSize="80%">
+          {item.startDate.split("T")[0]} الى {item.expiryDate.split("T")[0]}
+        </Text> */}
+        <Text>تبدأ الأسعار من 3000 ريال</Text>
+        {Array(5)
+          .fill("")
+          .map((_, i) => (
+            <StarIcon
+              key={i}
+              color={i < reviews ? "teal.500" : "gray.300"}
+              zIndex={"1"}
             />
-          </Box>
-          <Box>
-            {" "}
-            {name} ({city})
-          </Box>
-          <Box>الأسعار تبدأ من : 3000 ريال</Box>
-
-          <Box display="flex" mt="2" alignItems="center">
-            {Array(5)
-              .fill("")
-              .map((_, i) => (
-                <StarIcon
-                  key={i}
-                  color={i < reviews ? "teal.500" : "gray.300"}
-                />
-              ))}
-            <Box as="span" ml="2" color="gray.600" fontSize="sm">
-              34 مراجعة
-            </Box>
-
-            <Button
-              borderRadius="none"
-              onClick={() => {
-                if (select === 1) navigate(`/destinations/${city}/${id}`);
-                else navigate(`/dayInYourCity/${id}`);
-              }}
-            >
-              احجز الآن
-            </Button>
-          </Box>
-        </Box>
+          ))}
+        <Button
+          borderRadius="none"
+          bg="#666699"
+          onClick={() => {
+            if (select === 1) navigate(`/destinations/${city}/${id}`);
+            else navigate(`/dayInYourCity/${id}`);
+          }}
+        >
+          احجز الآن
+        </Button>
       </Box>
     </GridItem>
   );

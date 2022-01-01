@@ -8,9 +8,20 @@ import {
   Button,
   Box,
   Textarea,
+  useToast,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  cityRedux,
+  numOfDaysRedux,
   hotelRedux,
   transportationRedux,
   flightRedux,
@@ -19,6 +30,8 @@ import {
 } from "./../../reducers/order";
 
 export default function DestinationHotel({ city }) {
+  const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [hotels, setHotels] = useState([]);
   const [hotel, setHotel] = useState("");
 
@@ -128,21 +141,82 @@ export default function DestinationHotel({ city }) {
   };
   return (
     <div>
-      <Select
-        placeholder="الكل"
-        onChange={(e) => {
-          if (e.target.value) selectHotelFun(e.target.value);
-        }}
+      <Button onClick={onOpen}>الفنادق</Button>
+      <Modal
+        isCentered
+        onClose={onClose}
+        isOpen={isOpen}
+        motionPreset="slideInBottom"
+        scrollBehavior="inside"
+        w="50%"
       >
-        {hotels.map((item) => {
-          return (
-            <>
-              <option value={item._id}>{item.name}</option>
-            </>
-          );
-        })}
-      </Select>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalCloseButton marginRight="90%" />
+          <ModalHeader>الفندق</ModalHeader>
 
+          <ModalBody>
+            <Select
+              placeholder="الكل"
+              onChange={(e) => {
+                if (e.target.value) selectHotelFun(e.target.value);
+                toast({
+                  title: "تم اختيار الفندق بنجاح",
+                  // description: "We've created your account for you.",
+                  status: "success",
+                  duration: 3000,
+                  isClosable: true,
+                });
+              }}
+            >
+              {hotels.map((item) => {
+                return (
+                  <>
+                    <option value={item._id}>{item.name}</option>
+                  </>
+                );
+              })}
+            </Select>
+            {hotel ? (
+              <>
+                <h1>{hotel.name}</h1>
+                <h1>{hotel.desc}</h1>
+                <h1>{hotel.moreInfo}</h1>
+                <h1>{hotel.map}</h1>
+                <h1>{hotel.city}</h1>
+                <h1>{hotel.reviews}</h1>
+                {hotel.hotelInfo.map((item) => {
+                  return (
+                    <h1>
+                      {item.roomType} : {item.price}
+                    </h1>
+                  );
+                })}
+
+                {hotel.imges.map((item) => {
+                  return <Image src={item} />;
+                })}
+
+                <h1>4صور عن الفندق </h1>
+                <h1>معلومات الغرفة والسعر لكل منها </h1>
+                <h1>قوقل ماب</h1>
+                <h1>رابط معلومات مفصلة عن الفندق</h1>
+                <h1>عرض الفنادق على حسب السعر والتقييمات</h1>
+              </>
+            ) : (
+              <></>
+            )}
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              إغلاق
+            </Button>
+            {/* <Button variant="ghost">Secondary Action</Button> */}
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      {/* 
       <Select
         placeholder="ترتيب الفنادق على حسب:"
         onChange={(e) => {
@@ -153,37 +227,7 @@ export default function DestinationHotel({ city }) {
         <option value="2">الترتيب على حسب السعر من الأعلى الى الأقل</option>
         <option value="3">الترتيب على حسب التقييم من الأعلى الى الأقل</option>
         <option value="4">الترتيب على حسب التقييم من الأقل الى الأعلى</option>
-      </Select>
-
-      {hotel ? (
-        <>
-          <h1>{hotel.name}</h1>
-          <h1>{hotel.desc}</h1>
-          <h1>{hotel.moreInfo}</h1>
-          <h1>{hotel.map}</h1>
-          <h1>{hotel.city}</h1>
-          <h1>{hotel.reviews}</h1>
-          {hotel.hotelInfo.map((item) => {
-            return (
-              <h1>
-                {item.roomType} : {item.price}
-              </h1>
-            );
-          })}
-
-          {hotel.imges.map((item) => {
-            return <Image src={item} />;
-          })}
-
-          <h1>4صور عن الفندق </h1>
-          <h1>معلومات الغرفة والسعر لكل منها </h1>
-          <h1>قوقل ماب</h1>
-          <h1>رابط معلومات مفصلة عن الفندق</h1>
-          <h1>عرض الفنادق على حسب السعر والتقييمات</h1>
-        </>
-      ) : (
-        <></>
-      )}
+      </Select> */}
     </div>
   );
 }

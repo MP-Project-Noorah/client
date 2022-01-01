@@ -28,21 +28,23 @@ export default function AdminTouristGuides() {
   };
 
   const addTouristGuides = async () => {
+    const userId = localStorage.getItem("ID");
     try {
       const result = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/touristGuides/add`,
         {
+          userId,
           avter,
           city,
           fname,
           lname,
           mobile,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-        // {
-        //   headers: {
-        //     authorization: `Bearer ${localStorage.getItem("token")}`,
-        //   },
-        // }
       );
 
       console.log(result.data);
@@ -54,12 +56,13 @@ export default function AdminTouristGuides() {
   };
 
   const deleteTouristGuides = async (touristGuidesId) => {
+    const userId = localStorage.getItem("ID");
     try {
       const result = await axios.delete(
         `${process.env.REACT_APP_BASE_URL}/touristGuides/del`,
         {
-          data: { touristGuidesId },
-          // headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
+          data: { touristGuidesId, userId },
+          headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
       getAllItems();

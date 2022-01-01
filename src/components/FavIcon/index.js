@@ -6,17 +6,18 @@ export default function FavIcon({ idPro, getAllItems, user, getUserItem }) {
   const [id, setId] = useState(localStorage.getItem("ID"));
 
   const addToFav = async (fav) => {
+    const userId = localStorage.getItem("ID");
     try {
       const result = await axios.put(
         `${process.env.REACT_APP_BASE_URL}/users/updateFavUser`,
-        { id, fav }
-        //  {
-        //    headers: {
-        //      authorization: `Bearer ${localStorage.getItem("token")}`,
-        //    },
-        //  }
+        { id, fav, userId },
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
-      console.log(result.data);
+      //console.log(result.data);
       getUserItem();
       getAllItems();
     } catch (err) {
@@ -25,6 +26,7 @@ export default function FavIcon({ idPro, getAllItems, user, getUserItem }) {
   };
 
   const removeFav = async (arr) => {
+    const userId = localStorage.getItem("ID");
     const fav = arr.filter((item) => {
       return item !== idPro;
     });
@@ -32,14 +34,14 @@ export default function FavIcon({ idPro, getAllItems, user, getUserItem }) {
     try {
       const result = await axios.put(
         `${process.env.REACT_APP_BASE_URL}/users/updateFavUser`,
-        { id, fav }
-        //  {
-        //    headers: {
-        //      authorization: `Bearer ${localStorage.getItem("token")}`,
-        //    },
-        //  }
+        { id, fav, userId },
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
-      console.log(result.data);
+      //console.log(result.data);
       getUserItem();
       getAllItems();
     } catch (err) {

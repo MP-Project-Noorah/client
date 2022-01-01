@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Logout from "./../Logout";
-import { Button } from "@chakra-ui/react";
+import { Button, Heading, Box } from "@chakra-ui/react";
 
 export default function UserInfo() {
   const [user, setUser] = useState("");
@@ -24,14 +24,17 @@ export default function UserInfo() {
   };
 
   const deleteUser = async () => {
+    const userId = localStorage.getItem("ID");
+
     try {
       const result = await axios.delete(
         `${process.env.REACT_APP_BASE_URL}/users/del`,
         {
-          data: { id },
-          // headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
+          data: { id, userId },
+          headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
+      console.log("ffff");
 
       //getAllItems();
     } catch (err) {
@@ -43,20 +46,23 @@ export default function UserInfo() {
     <div>
       {user ? (
         <>
-          <h1>{user._id}</h1>
-          <h1>{user.phoneNumber}</h1>
-          <h1>{user.email}</h1>
-          <Button
-            onClick={() => {
-              deleteUser();
-              {
-                <Logout />;
-              }
-            }}
-          >
-            {" "}
-            حذف الحساب{" "}
-          </Button>
+          <Box bg="white" w="100%" shadow="md" p="4%" marginTop="4%">
+            <Heading>{user._id}</Heading>
+            <Heading>{user.phoneNumber}</Heading>
+            <Heading>{user.email}</Heading>
+
+            <Button
+              onClick={() => {
+                deleteUser();
+                {
+                  <Logout />;
+                }
+              }}
+            >
+              {" "}
+              حذف الحساب{" "}
+            </Button>
+          </Box>
         </>
       ) : (
         <></>

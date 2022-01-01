@@ -34,10 +34,12 @@ export default function AdminDayInYourCity() {
   };
 
   const addDayInYourCity = async () => {
+    const userId = localStorage.getItem("ID");
     try {
       const result = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/dayInYourCity/add`,
         {
+          userId,
           name,
           city,
           desc,
@@ -48,12 +50,12 @@ export default function AdminDayInYourCity() {
           timeStart,
           timeFinish,
           images,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-        // {
-        //   headers: {
-        //     authorization: `Bearer ${localStorage.getItem("token")}`,
-        //   },
-        // }
       );
 
       console.log(result.data);
@@ -65,12 +67,13 @@ export default function AdminDayInYourCity() {
   };
 
   const deleteDayInYourCity = async (dayInYourCityId) => {
+    const userId = localStorage.getItem("ID");
     try {
       const result = await axios.delete(
         `${process.env.REACT_APP_BASE_URL}/dayInYourCity/del`,
         {
-          data: { dayInYourCityId },
-          // headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
+          data: { dayInYourCityId, userId },
+          headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
       getAllItems();

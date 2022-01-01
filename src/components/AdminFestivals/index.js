@@ -29,22 +29,24 @@ export default function AdminFestivals() {
   };
 
   const addFestival = async () => {
+    const userId = localStorage.getItem("ID");
     try {
       const result = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/festivals/add`,
         {
+          userId,
           name,
           city,
           desc,
           imge,
           map,
           cost,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-        // {
-        //   headers: {
-        //     authorization: `Bearer ${localStorage.getItem("token")}`,
-        //   },
-        // }
       );
 
       console.log(result.data);
@@ -56,12 +58,13 @@ export default function AdminFestivals() {
   };
 
   const deleteFestival = async (festivalId) => {
+    const userId = localStorage.getItem("ID");
     try {
       const result = await axios.delete(
         `${process.env.REACT_APP_BASE_URL}/festivals/del`,
         {
-          data: { festivalId },
-          // headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
+          data: { festivalId, userId },
+          headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
       getAllItems();

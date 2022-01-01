@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { Heading, Input, Button } from "@chakra-ui/react";
 
 export default function CompleteResetPassword() {
   const [password, setPassword] = useState("");
@@ -14,20 +15,40 @@ export default function CompleteResetPassword() {
     );
     console.log(result);
 
-    //navigate(`/`);
+    if (result.data === "Password not complex")
+      alert("يجب ان تحتوي كلمة المرور على احرف صغيرة وكبيرة وارقام ورموز");
+    else {
+      alert("تم التعديل بنجاح");
+      navigate(`/login`);
+    }
   };
 
   return (
     <div>
-      <h1>CompleteResetPassword</h1>
+      <Heading>اعادة تعيين كلمة المرور</Heading>
+
+      <Input
+        marginTop="6%"
+        type="email"
+        name="email"
+        placeholder="اعادة تعيين كلمة المرور"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
+      <Button marginTop="6%" w="100%" onClick={() => reset()}>
+        {" "}
+        اعادة التعيين{" "}
+      </Button>
+
+      {/* <h1>CompleteResetPassword</h1>
 
       <input
         type="password"
         name="password"
         onChange={(e) => setPassword(e.target.value)}
-      />
+      /> */}
 
-      <button onClick={() => reset()}> reset </button>
+      {/* <button onClick={() => reset()}> reset </button> */}
     </div>
   );
 }

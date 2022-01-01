@@ -1,27 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Search2Icon, StarIcon } from "@chakra-ui/icons";
+import { Search2Icon } from "@chakra-ui/icons";
 
 import {
   Grid,
-  GridItem,
   Input,
   InputGroup,
   InputLeftElement,
   Select,
-  RangeSlider,
-  RangeSliderTrack,
-  RangeSliderFilledTrack,
-  RangeSliderThumb,
-  Switch,
   Box,
-  Badge,
-  Image,
+  Center,
+  Heading,
   Button,
-  Spacer,
 } from "@chakra-ui/react";
-import FavIcon from "../FavIcon";
+
 import Card from "../Card";
 
 export default function Destinations() {
@@ -31,6 +24,7 @@ export default function Destinations() {
   const [user, setUser] = useState("");
   const [id, setId] = useState(localStorage.getItem("ID"));
   const [select, setSelect] = useState(1);
+  const [filterItems, setFilterItems] = useState([]);
 
   useEffect(() => {
     getUserItem();
@@ -57,82 +51,167 @@ export default function Destinations() {
       );
 
       setDestinations(result.data);
+      setFilterItems(result.data);
       console.log(result.data);
     } catch (err) {
       console.log(err);
     }
   };
 
+  const searchFun = (e) => {
+    const searchWord = e.target.value;
+    console.log(searchWord);
+
+    if (searchWord) {
+      const newItems = destinations.map(
+        (item) =>
+          item.name.includes(searchWord) || item.city.includes(searchWord)
+      );
+
+      setFilterItems(newItems);
+    } else setFilterItems(destinations);
+  };
+
+  const sortDFun = (val) => {
+    console.log(val);
+    let arr = [...destinations];
+    if (val == 1) {
+      for (let i = 0; i < arr.length; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+          if (arr[i].reviews < arr[j].reviews) {
+            let swap = arr[i];
+            arr[i] = arr[j];
+            arr[j] = swap;
+          }
+        }
+      }
+      setFilterItems(arr);
+    } else if (val == 2) {
+      for (let i = 0; i < arr.length; i++) {
+        //console.log(arr[i].hotelInfo[0].price);
+        let price1 =
+          (arr[i].hotelInfo[0].price + arr[i].hotelInfo[1].price) / 2;
+        for (let j = i + 1; j < arr.length; j++) {
+          let price2 =
+            (arr[j].hotelInfo[0].price + arr[j].hotelInfo[1].price) / 2;
+          if (price1 < price2) {
+            let swap = arr[i];
+            arr[i] = arr[j];
+            arr[j] = swap;
+          }
+        }
+      }
+      //setHotels(arr);
+      // } else if (val == 3) {
+      //   let arr = [...hotels];
+      //   for (let i = 0; i < arr.length; i++) {
+      //     // console.log(arr[i].hotelInfo[0].price);
+
+      //     for (let j = i + 1; j < arr.length; j++) {
+      //       if (arr[i].reviews > arr[j].reviews) {
+      //         let swap = arr[i];
+      //         arr[i] = arr[j];
+      //         arr[j] = swap;
+      //       }
+      //     }
+      //   }
+      //   setHotels(arr);
+      // } else if (val == 4) {
+      //   let arr = [...hotels];
+      //   for (let i = 0; i < arr.length; i++) {
+      //     //console.log(arr[i].hotelInfo[0].price);
+
+      //     for (let j = i + 1; j < arr.length; j++) {
+      //       if (arr[i].reviews < arr[j].reviews) {
+      //         let swap = arr[i];
+      //         arr[i] = arr[j];
+      //         arr[j] = swap;
+      //       }
+      //     }
+      //   }
+      //   setHotels(arr);
+    }
+  };
+
   return (
     <div>
-      <Grid
-        h="200px"
-        templateRows="repeat(2, 1fr)"
-        templateColumns="repeat(5, 1fr)"
-        margin="7%"
-        gap={4}
+      <Box
+        bg={`linear-gradient(0deg,
+      rgba(0, 0, 0, 0.30),
+      rgba(0, 0, 0, 0.30)
+    ),
+    url("https://static1.s123-cdn-static-a.com/ready_uploads/media/2666516/800_5e05374d7cdbf.jpg")`}
+        w="100%"
+        h="500px"
+        p={4}
+        color="white"
+        backgroundPosition="center"
+        backgroundRepeat="no-repeat"
+        backgroundSize="cover"
       >
-        <GridItem
-          colSpan={1}
-          rowSpan={2}
-          border="1px"
-          borderColor="gray.300"
-          p="5"
-        >
-          <h1>السعر:</h1>
-          <RangeSlider aria-label={["min", "max"]} defaultValue={[1000, 3000]}>
-            <RangeSliderTrack>
-              <RangeSliderFilledTrack />
-            </RangeSliderTrack>
-            <RangeSliderThumb index={0} />
-            <RangeSliderThumb index={1} />
-          </RangeSlider>
+        <Center>
+          <Box marginTop="13%" alignItems="baseline" textAlign="center">
+            <Heading marginBottom="5%" class="home2">
+              وجهتك جاهزة معنا ،انت جاهز ؟
+            </Heading>
+            <Heading marginBottom="5%" class="home1">
+              السعودية الوجهة القادمة للعالم
+            </Heading>
+          </Box>
+        </Center>
+      </Box>
 
-          <h1>التصنيف:</h1>
-          <Select placeholder="الكل">
-            <option value="val1">الرئيسية</option>
-            <option value="val2">الترفيهية</option>
-            <option value="val3">ثقافية</option>
-            <option value="val4">رياضية</option>
-            <option value="val4">دينية</option>
-          </Select>
-          <h1>المدينة:</h1>
-          <Select placeholder="مكة">
-            <option value="val2">المدينة</option>
-            <option value="val3">الرياض </option>
-            <option value="val4">بريدة</option>
-            <option value="val4">أبها</option>
-            <option value="val4">جدة</option>
-            <option value="val4">بريدة</option>
-          </Select>
-          <h1>
-            مناسب للعائلة: <Switch size="md" />
-          </h1>
-        </GridItem>
-        <GridItem colSpan={4} rowSpan={1} display="flex" alignItems="baseline">
-          <InputGroup w="30%">
-            <Input placeholder="البحث" />
-            <InputLeftElement children={<Search2Icon color="gray.300" />} />
-          </InputGroup>
-          <Spacer />
+      <Center>
+        <Box display="flex" marginTop="10%" w="90%" bg="white" p="3%">
+          <Box w="30%">
+            <Box
+              borderColor="rgba(102, 102, 153, 0.4)"
+              borderWidth="1px"
+              p="3%"
+              marginLeft="10%"
+              h="300"
+            >
+              <InputGroup>
+                <Input placeholder="البحث" onChange={(e) => searchFun(e)} />
+                <InputLeftElement children={<Search2Icon color="gray.300" />} />
+              </InputGroup>
 
-          <Select placeholder="الأفضل مبيعًا" w="30%">
-            <option value="val1">الأعلى تقييمًا</option>
-            <option value="val2">الأقل تقييمًا</option>
-            <option value="val3">الثمن من الأعلى الى الأقل </option>
-            <option value="val4">الثمن من الأقل الى الأعلى</option>
-            <option value="val4">الأحدث</option>
-          </Select>
-          <Spacer />
+              <Select
+                placeholder="الأفضل مبيعًا"
+                onChange={(e) => sortDFun(e.target.value)}
+              >
+                <option value="1">الأعلى تقييمًا</option>
+                <option value="2">الأقل تقييمًا</option>
+                <option value="3">الثمن من الأعلى الى الأقل </option>
+                <option value="4">الثمن من الأقل الى الأعلى</option>
+                <option value="4">الأحدث</option>
+              </Select>
 
-          <h1>
-            شامل الوجهات المنتهية تاريخها: <Switch size="md" />
-          </h1>
-        </GridItem>
+              <Select placeholder="مكة">
+                <option value="val2">المدينة</option>
+                <option value="val3">الرياض </option>
+                <option value="val4">بريدة</option>
+                <option value="val4">أبها</option>
+                <option value="val4">جدة</option>
+              </Select>
 
-        <GridItem colSpan={4} rowSpan={1}>
-          <Grid templateColumns="repeat(3, 1fr)" margin="7%" gap={4}>
-            {destinations.map((item) => {
+              <Select placeholder="الكل">
+                <option value="val1">عائلي</option>
+                <option value="val2">اصدقاء</option>
+                <option value="val3">ثقافي</option>
+                <option value="val3">رياضي</option>
+                <option value="val3">ديني</option>
+              </Select>
+            </Box>
+          </Box>
+
+          <Grid
+            templateColumns="repeat(2, 1fr)"
+            gap={6}
+            marginTop="5%"
+            w="100%"
+          >
+            {filterItems.map((item) => {
               return (
                 <Card
                   id={item._id}
@@ -149,8 +228,8 @@ export default function Destinations() {
               );
             })}
           </Grid>
-        </GridItem>
-      </Grid>
+        </Box>
+      </Center>
     </div>
   );
 }

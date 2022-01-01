@@ -9,6 +9,14 @@ import {
   Button,
   Box,
   Textarea,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -20,6 +28,7 @@ import {
 } from "./../../reducers/order";
 
 export default function DestinationTransportation({ city }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [transportations, setTransportations] = useState([]);
   const [transportation, setTransportation] = useState("");
   const dispatch = useDispatch();
@@ -63,36 +72,55 @@ export default function DestinationTransportation({ city }) {
 
   return (
     <div>
-      <h1>المواصلات</h1>
-      <Select
-        placeholder="الكل"
-        onChange={(e) => {
-          if (e.target.value) selectTransportationFun(e.target.value);
-        }}
+      <Button onClick={onOpen}>المواصلات</Button>
+      <Modal
+        isCentered
+        onClose={onClose}
+        isOpen={isOpen}
+        motionPreset="slideInBottom"
       >
-        {transportations.map((item) => {
-          return (
-            <>
-              <option value={item._id}>
-                {item.companyName} {item.carType}
-              </option>
-            </>
-          );
-        })}
-      </Select>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>المواصلات</ModalHeader>
+          <ModalCloseButton marginRight="90%" />
+          <ModalBody>
+            <Select
+              placeholder="الكل"
+              onChange={(e) => {
+                if (e.target.value) selectTransportationFun(e.target.value);
+              }}
+            >
+              {transportations.map((item) => {
+                return (
+                  <>
+                    <option value={item._id}>
+                      {item.companyName} {item.carType}
+                    </option>
+                  </>
+                );
+              })}
+            </Select>
 
-      {transportation ? (
-        <>
-          <Image size="md" name="car" src={transportation.image} />
-          <h1>{transportation.companyName}</h1>
-          <h1>{transportation.city}</h1>
-          <h1>{transportation.carType}</h1>
-          <h1>{transportation.model}</h1>
-          <h1>{transportation.price}</h1>
-        </>
-      ) : (
-        <></>
-      )}
+            {transportation ? (
+              <>
+                <Image size="md" name="car" src={transportation.image} />
+                <h1>{transportation.companyName}</h1>
+                <h1>{transportation.city}</h1>
+                <h1>{transportation.carType}</h1>
+                <h1>{transportation.model}</h1>
+                <h1>{transportation.price}</h1>
+              </>
+            ) : (
+              <></>
+            )}
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              إغلاق
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 }

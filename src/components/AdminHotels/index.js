@@ -38,10 +38,12 @@ export default function AdminHotels() {
   };
 
   const addHotel = async () => {
+    const userId = localStorage.getItem("ID");
     try {
       const result = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/hotels/add`,
         {
+          userId,
           name,
           city,
           desc,
@@ -53,15 +55,15 @@ export default function AdminHotels() {
             { roomType: roomType1, price: price1 },
             { roomType: roomType2, price: price2 },
           ],
+        },
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-        // {
-        //   headers: {
-        //     authorization: `Bearer ${localStorage.getItem("token")}`,
-        //   },
-        // }
       );
 
-      console.log(result.data);
+      //console.log(result.data);
 
       getAllItems();
     } catch (err) {
@@ -70,12 +72,13 @@ export default function AdminHotels() {
   };
 
   const deleteHotel = async (hotelId) => {
+    const userId = localStorage.getItem("ID");
     try {
       const result = await axios.delete(
         `${process.env.REACT_APP_BASE_URL}/hotels/del`,
         {
-          data: { hotelId },
-          // headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
+          data: { hotelId, userId },
+          headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
       getAllItems();

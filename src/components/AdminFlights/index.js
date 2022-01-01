@@ -29,22 +29,24 @@ export default function AdminFlights() {
   };
 
   const addFlights = async () => {
+    const userId = localStorage.getItem("ID");
     try {
       const result = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/flights/add`,
         {
+          userId,
           from,
           to,
           flightClass,
           childTicketPrice,
           infantTicketPrice,
           adultTicketPrice,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-        // {
-        //   headers: {
-        //     authorization: `Bearer ${localStorage.getItem("token")}`,
-        //   },
-        // }
       );
 
       console.log(result.data);
@@ -56,12 +58,13 @@ export default function AdminFlights() {
   };
 
   const deleteFlights = async (flightsId) => {
+    const userId = localStorage.getItem("ID");
     try {
       const result = await axios.delete(
         `${process.env.REACT_APP_BASE_URL}/flights/del`,
         {
-          data: { flightsId },
-          // headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
+          data: { flightsId, userId },
+          headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
       getAllItems();

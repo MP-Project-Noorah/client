@@ -29,22 +29,24 @@ export default function AdminTransportation() {
   };
 
   const addTransportation = async () => {
+    const userId = localStorage.getItem("ID");
     try {
       const result = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/transportation/add`,
         {
+          userId,
           companyName,
           city,
           carType,
           model,
           image,
           price,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-        // {
-        //   headers: {
-        //     authorization: `Bearer ${localStorage.getItem("token")}`,
-        //   },
-        // }
       );
 
       console.log(result.data);
@@ -56,12 +58,13 @@ export default function AdminTransportation() {
   };
 
   const deleteTransportation = async (transportationId) => {
+    const userId = localStorage.getItem("ID");
     try {
       const result = await axios.delete(
         `${process.env.REACT_APP_BASE_URL}/transportation/del`,
         {
-          data: { transportationId },
-          // headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
+          data: { transportationId, userId },
+          headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       );
       getAllItems();

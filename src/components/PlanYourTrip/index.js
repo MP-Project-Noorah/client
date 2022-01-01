@@ -1,10 +1,53 @@
 import React from "react";
+import DestinationHotel from "./../DestinationHotel";
+import DestinationTouristGuides from "./../DestinationTouristGuides";
+import DestinationTransportation from "./../DestinationTransportation";
+import DestinationFlights from "./../DestinationFlights";
+import {
+  Box,
+  Grid,
+  GridItem,
+  Image,
+  Center,
+  Heading,
+  Text,
+  Button,
+  AspectRatio,
+  Spacer,
+} from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+
+import Order from "./../Order";
 
 export default function PlanYourTrip() {
+  const navigate = useNavigate();
+
   return (
     <div>
-      المدينة الفنادق عدد الأيام مكان لكل يوم المرشد السياحي تذاكر الطياران عدد
-      الأشخاص
+      <Order
+        type={"PlanYourTrip"}
+        text1={"خطط لرحلتك الآن!"}
+        text2={"وسهلناهل لك, اختر وجهتك بحسب اختياراتك واماكانك المفضلة"}
+        city={""}
+      />
+      {/* <PlanYourTripFestivals />
+      <PlanYourTripTouristGuides />
+      <PlanYourTripTransportation />
+      <PlanYourTripFlights />
+      <Select
+        placeholder="الكل"
+        onChange={(e) => {
+          if (e.target.value) selectHotelFun(e.target.value);
+        }}
+      >
+        {hotels.map((item) => {
+          return (
+            <>
+              <option value={item._id}>{item.name}</option>
+            </>
+          );
+        })}
+      </Select> */}
     </div>
   );
 }

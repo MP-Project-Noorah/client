@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Heading, Input, Button } from "@chakra-ui/react";
 
 export default function ResetPass() {
   const [email, setEmail] = useState("");
@@ -17,16 +18,21 @@ export default function ResetPass() {
   };
 
   return (
-    <div>
-      <h1>ResetPass</h1>
+    <>
+      <Heading>الإيميل</Heading>
 
-      <input
+      <Input
+        marginTop="6%"
         type="email"
         name="email"
+        placeholder="اكتب ايميلك لكي نرسل لك رسالة لتعديل كلمة المرور"
         onChange={(e) => setEmail(e.target.value)}
       />
 
-      <button onClick={() => reset()}> reset </button>
-    </div>
+      <Button marginTop="6%" w="100%" onClick={() => reset()}>
+        {" "}
+        ارسال{" "}
+      </Button>
+    </>
   );
 }

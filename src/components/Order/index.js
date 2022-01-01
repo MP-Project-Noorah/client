@@ -35,7 +35,7 @@ export default function Order({ type, text1, text2 }) {
       rgba(0, 0, 0, 0.30),
       rgba(0, 0, 0, 0.30)
     ),
-    url("/order.jpeg")`}
+    url("${"https://www.abouther.com/sites/default/files/2021/07/14/saudi_al_ula_alula_elephant_rock_tourism.jpg"}")`}
         w="100%"
         h="750"
         p={4}
@@ -86,7 +86,7 @@ export default function Order({ type, text1, text2 }) {
           </Modal>
           <DestinationHotel city={"بريدة"} />
           <DestinationTouristGuides city={"القصيم"} />
-          <br />
+          {/* <Box borderWidth="2px" bg="black" w="50%" margin="5% auto" /> */}
           <DestinationTransportation city={"بريدة"} />
           <DestinationFlights city={"القصيم"} />
         </Box>

@@ -8,10 +8,19 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
   Button,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
 } from "@chakra-ui/react";
 import axios from "axios";
 
 export default function DestinationCost() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [adultTicket, setAdultTicket] = useState(0);
   const [childTicket, setChildTicket] = useState(0);
   const [infantTicket, setInfantTicket] = useState(0);
@@ -157,7 +166,48 @@ export default function DestinationCost() {
           <NumberDecrementStepper />
         </NumberInputStepper>
       </NumberInput>
-      <Button onClick={() => cal()}>الحجز</Button>
+
+      <Button onClick={onOpen}>الوجهة</Button>
+      <Modal
+        isCentered
+        onClose={onClose}
+        isOpen={isOpen}
+        motionPreset="slideInBottom"
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>الوجهة</ModalHeader>
+          <ModalCloseButton marginRight="90%" />
+          <ModalBody>بريدة</ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              إغلاق
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      <Button onClick={onOpen}>الحجز</Button>
+      <Modal
+        isCentered
+        onClose={onClose}
+        isOpen={isOpen}
+        motionPreset="slideInBottom"
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>الحجز</ModalHeader>
+          <ModalCloseButton marginRight="90%" />
+          <ModalBody>
+            عذرًا خدمة الحجز غير متاحة حاليًا . الموقع قيد الإنشاء
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              إغلاق
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 }

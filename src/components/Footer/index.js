@@ -17,6 +17,7 @@ export default function Footer() {
       >
         <Box textAlign="center" color="white">
           جميع الحقوق محفوظة لنورة المحيميد في معسكر طويق 2020
+          <Box borderWidth="2px" bg="black" w="50%" margin="5% auto" />
         </Box>
         {/* <Box
           bg="black.100"

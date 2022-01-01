@@ -6,15 +6,15 @@ import {
   Tab,
   TabPanels,
   TabPanel,
-  Accordion,
-  AccordionItem,
-  Box,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-  Image,
-  Heading,
-  Text,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  Button,
 } from "@chakra-ui/react";
 
 import Comments from "./../Comments";
@@ -23,6 +23,7 @@ import ItemCard from "./../ItemCard";
 
 export default function DayInYourCityInfo() {
   const { id } = useParams();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [dayInYourCity, setDayInYourCity] = useState({});
   useEffect(() => {
@@ -71,6 +72,28 @@ export default function DayInYourCityInfo() {
           </TabPanel>
           <TabPanel>
             <p>التكلفة الكلية</p>
+
+            <Button onClick={onOpen}>الحجز</Button>
+            <Modal
+              isCentered
+              onClose={onClose}
+              isOpen={isOpen}
+              motionPreset="slideInBottom"
+            >
+              <ModalOverlay />
+              <ModalContent>
+                <ModalHeader>الحجز</ModalHeader>
+                <ModalCloseButton marginRight="90%" />
+                <ModalBody>
+                  عذرًا خدمة الحجز غير متاحة حاليًا . الموقع قيد الإنشاء
+                </ModalBody>
+                <ModalFooter>
+                  <Button colorScheme="blue" mr={3} onClick={onClose}>
+                    إغلاق
+                  </Button>
+                </ModalFooter>
+              </ModalContent>
+            </Modal>
           </TabPanel>
         </TabPanels>
       </Tabs>

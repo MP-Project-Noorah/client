@@ -14,9 +14,9 @@ import PopularItems from "../PopularItems";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 const images = [
-  "https://d3rr2gvhjw0wwy.cloudfront.net/uploads/activity_headers/310563/900x600-1-50-62970602aa07be3b1147c01cea649889.jpg",
+  "https://vid.alarabiya.net/images/2018/08/29/e883ce10-d54b-443c-96d3-74ec74bdb702/e883ce10-d54b-443c-96d3-74ec74bdb702_16x9_1200x676.jpg?width=1138",
   "https://d3rr2gvhjw0wwy.cloudfront.net/uploads/activity_galleries/285169/2000x2000-0-70-27bb87e7ae3dd27151fbc510fb8a9bb4.jpg",
-  "https://d3rr2gvhjw0wwy.cloudfront.net/uploads/activity_headers/310899/900x600-1-50-6319aa3d9714394a5eb28452abb66b4d.jpg",
+  "https://www.experiencealula.com/getattachment/a7d5ff00-61df-4f6a-91ff-45257ed69ef0/raod_trip_panel_833x551.jpg",
 ];
 
 export default function Home() {
@@ -102,7 +102,11 @@ export default function Home() {
               zIndex="1"
             >
               <GridItem colSpan={1}>
-                <Image src="/home2.jpeg" alt="wjhat" w="90%" />
+                <Image
+                  src="https://www.annahar.com/ContentFilesArchive/474054Image1.jpg?version=3884483"
+                  alt="wjhat"
+                  w="90%"
+                />
               </GridItem>
               <GridItem colSpan={1}>
                 <Box p={7} color="white">
@@ -165,7 +169,11 @@ export default function Home() {
               bg="rgb(224, 224, 235)"
             >
               <GridItem colSpan={1}>
-                <Image src="/home2.jpeg" alt="wjhat" w="90%" />
+                <Image
+                  src="https://media-cdn.tripadvisor.com/media/photo-s/1c/d4/4e/ba/caption.jpg"
+                  alt="wjhat"
+                  w="90%"
+                />
               </GridItem>
               <GridItem colSpan={1}>
                 <Box p={7}>

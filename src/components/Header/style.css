@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rakkas&display=swap");
 
 .logo {
   font-family: "Noto Kufi Arabic", sans-serif;
-  font-size: large;
+  font-size: 300%;
   color: black;
   margin-right: 3%;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Rakkas", cursive;
 }

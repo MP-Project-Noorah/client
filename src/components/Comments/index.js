@@ -5,9 +5,7 @@ import {
   Heading,
   Button,
   useToast,
-  Container,
   Box,
-  Image,
   Text,
   Center,
   CloseButton,
@@ -15,10 +13,12 @@ import {
 
 export default function Comments({ id }) {
   const [comments, setComments] = useState([]);
+  const [users, setUsers] = useState([]);
   const [text, setText] = useState("");
   const toast = useToast();
 
   useEffect(() => {
+    getUsers();
     getAllComments();
   }, []);
 
@@ -30,6 +30,19 @@ export default function Comments({ id }) {
 
       setComments(result.data);
       //console.log(result.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getUsers = async () => {
+    try {
+      const result = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/users/getUsers`
+      );
+
+      setUsers(result.data);
+      console.log(result.data);
     } catch (err) {
       console.log(err);
     }
@@ -80,9 +93,12 @@ export default function Comments({ id }) {
   return (
     <div>
       <Center>
-        <Box w="60%">
-          التعليقات:
-          <Heading fontSize="l" marginTop="3%">
+        <Box w="70%" bg="white" p="3%" marginTop="3%">
+          <Heading fontSize="l" margin="2%">
+            التعليقات:
+          </Heading>
+
+          <Heading fontSize="l" margin="2%">
             إضافة تعليق:
           </Heading>
           <Textarea
@@ -97,14 +113,27 @@ export default function Comments({ id }) {
             marginBottom="5%"
             w="100%"
             onClick={() => {
-              addComment();
-              toast({
-                title: "إضافة تعليق",
-                description: "تم بنجاح إضافة التعليق",
-                status: "success",
-                duration: 3000,
-                isClosable: true,
-              });
+              if (localStorage.getItem("ID")) {
+                addComment();
+                toast({
+                  title: "إضافة تعليق",
+                  description: "تم بنجاح إضافة التعليق",
+                  status: "success",
+                  position: "top",
+                  duration: 3000,
+                  isClosable: true,
+                });
+              } else {
+                toast({
+                  title: "إضافة تعليق",
+                  description:
+                    "عذرًا لايمكنك إضافة تعليق. الرجاء تسجيل الدخول أولًا",
+                  status: "success",
+                  position: "top",
+                  duration: 3000,
+                  isClosable: true,
+                });
+              }
             }}
           >
             الإضافة
@@ -112,7 +141,8 @@ export default function Comments({ id }) {
           {comments.map((item) => {
             return (
               <>
-                <Box bg="white" w="100%" shadow="md" p="4%" marginTop="4%">
+                {/* //shadow="md" */}
+                <Box bg="white" w="100%" p="4%" marginTop="4%">
                   {localStorage.getItem("ID") &&
                   (item.userId === localStorage.getItem("ID") ||
                     localStorage.getItem("role") ===
@@ -131,7 +161,13 @@ export default function Comments({ id }) {
                     // </Button>
                     <></>
                   )}
-                  <Text>{item.userId}</Text>
+                  <Text>
+                    {users.length ? (
+                      users.find((item2) => item.userId === item2._id).username
+                    ) : (
+                      <></>
+                    )}
+                  </Text>
                   <Box
                     borderWidth="2px"
                     bg="black.900"

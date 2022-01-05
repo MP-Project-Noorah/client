@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import axios from "axios";
+import { Button } from "@chakra-ui/button";
 
 export default function FavIcon({ idPro, getAllItems, user, getUserItem }) {
   const [id, setId] = useState(localStorage.getItem("ID"));
@@ -58,20 +59,24 @@ export default function FavIcon({ idPro, getAllItems, user, getUserItem }) {
           user.fav.find((item2) => {
             return item2 === idPro;
           }) ? (
-            <button onClick={() => removeFav(user.fav)}>
-              <AiFillHeart />
-            </button>
+            <AiFillHeart
+              size={40}
+              color={"rgba(105, 12, 12, 0.8)"}
+              onClick={() => removeFav(user.fav)}
+            />
           ) : (
-            <button>
-              <AiOutlineHeart onClick={() => addToFav([...user.fav, idPro])} />
-            </button>
+            <AiFillHeart
+              size={[40]}
+              color={"#C0C0C0"}
+              onClick={() => addToFav([...user.fav, idPro])}
+            />
           )
         ) : (
-          <AiOutlineHeart />
+          <AiFillHeart size={40} color={"#C0C0C0"} />
         )
       ) : (
         <>
-          <AiOutlineHeart />
+          <AiFillHeart size={40} color={"#C0C0C0"} />
         </>
       )}
     </div>

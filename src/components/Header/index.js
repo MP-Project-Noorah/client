@@ -31,10 +31,9 @@ export default function Header() {
     <div>
       <Box
         border="1px"
-        fontSize="14px"
         fontWeight="semibold"
         borderColor="#ccd0d5"
-        padding="1%"
+        padding={["0.3%", "0.5%", "0.7%", "1%"]}
         position="fixed"
         zIndex="1"
         top="0"
@@ -43,15 +42,38 @@ export default function Header() {
         opacity=".9"
       >
         <Flex>
-          <span className="logo">وجهتي</span>
+          <Box fontSize={["100%", "130%", "155%", "180%"]} w="20%">
+            <span className="logo">وجهتي</span>
+          </Box>
           <Spacer />
-          <Box display="flex" justifyContent="space-between">
-            <HStack spacing="24px">
-              <Link to="/"> الرئيسية </Link>
-              <Link to="/destinations"> الوجهات </Link>
-              <Link to="/dayInYourCity"> يوم في مدينتك </Link>
-              <Link to="/PlanYourTrip">خطط لرحلتك</Link>
-              <Link to="/travelTips"> ارشادات السفر </Link>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            width={["70%", "62%", "57%", "50%"]}
+
+            // bg="green"
+          >
+            <HStack w="100%">
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                width={["100%", "90%", "80%", "70%"]}
+                marginLeft={["0%", "1%", "2%", "4%"]}
+                fontSize={["40%", "60%", "80%", "100%"]}
+                // width={[
+                //   "100%", // 0-30em
+                //   "50%", // 30em-48em
+                //   "25%", // 48em-62em
+                //   "15%", // 62em+
+                // ]}
+              >
+                <Link to="/"> الرئيسية </Link>
+                <Link to="/destinations"> الوجهات </Link>
+                <Link to="/dayInYourCity"> يوم في مدينتك </Link>
+                <Link to="/PlanYourTrip">خطط لرحلتك</Link>
+                {/* <Link to="/travelTips"> ارشادات السفر </Link> */}
+                <Link to="/whoAreWe"> من نحن </Link>
+              </Box>
 
               {localStorage.getItem("ID") ? (
                 <>
@@ -117,14 +139,20 @@ export default function Header() {
                     color="white"
                     borderRadius="none"
                     variant="solid"
+                    h={["50%", "57%", "63%", "70%"]}
+                    w={["7%", "9%", "11%", "14%"]}
+                    fontSize={["40%", "57%", "70%", "90%"]}
                     onClick={() => navigate("/login")}
                   >
                     تسجيل الدخول
                   </Button>
                   <Button
+                    h={["50%", "57%", "63%", "70%"]}
+                    w={["5%", "7%", "8%", "10%"]}
                     borderRadius="none"
                     colorScheme="blue"
                     variant="outline"
+                    fontSize={["40%", "57%", "70%", "90%"]}
                     onClick={() => navigate("/signup")}
                   >
                     التسجيل

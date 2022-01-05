@@ -13,26 +13,85 @@ import MyFav from "./components/MyFav";
 import MyOrders from "./components/MyOrders";
 import LoginSignupDesign from "./components/LoginSignupDesign";
 import Footer from "./components/Footer";
+import WhoAreWe from "./components/WhoAreWe";
 function App() {
   return (
     <>
       <Header />
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/destinations" element={<Destinations />} />
-        <Route exact path="/UserInfo" element={<UserInfo />} />
-        <Route exact path="/MyFav" element={<MyFav />} />
-        <Route exact path="/MyOrders" element={<MyOrders />} />
+        <Route
+          exact
+          path="/"
+          element={
+            <>
+              <Home />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          exact
+          path="/destinations"
+          element={
+            <>
+              <Destinations /> <Footer />
+            </>
+          }
+        />
+        <Route
+          exact
+          path="/UserInfo"
+          element={
+            <>
+              <UserInfo /> <Footer />
+            </>
+          }
+        />
+        <Route
+          exact
+          path="/MyFav"
+          element={
+            <>
+              <MyFav /> <Footer />
+            </>
+          }
+        />
+        <Route
+          exact
+          path="/MyOrders"
+          element={
+            <>
+              <MyOrders /> <Footer />
+            </>
+          }
+        />
         <Route
           exact
           path="/destinations/:city/:id"
-          element={<DestinationInfo />}
+          element={
+            <>
+              <DestinationInfo /> <Footer />
+            </>
+          }
         />
-        <Route exact path="/dayInYourCity" element={<DayInYourCity />} />
+        <Route
+          exact
+          path="/dayInYourCity"
+          element={
+            <>
+              <DayInYourCity /> <Footer />
+            </>
+          }
+        />
         <Route
           exact
           path="/dayInYourCity/:id"
-          element={<DayInYourCityInfo />}
+          element={
+            <>
+              <DayInYourCityInfo />
+              <Footer />
+            </>
+          }
         />
         <Route exact path="/PlanYourTrip" element={<PlanYourTrip />} />
         <Route exact path="/travelTips" element={<TravelTips />} />
@@ -46,7 +105,16 @@ function App() {
           path="/login"
           element={<LoginSignupDesign type={"login"} />}
         />
-        <Route exact path="/admin" element={<Admin />} />
+        <Route
+          exact
+          path="/admin"
+          element={
+            <>
+              <Admin />
+              <Footer />
+            </>
+          }
+        />
         <Route
           exact
           path="/resetPass"
@@ -57,10 +125,18 @@ function App() {
           path="users/completeResetPassword/:id"
           element={<LoginSignupDesign type={"completeResetPassword"} />}
         />
-
+        <Route
+          exact
+          path="/whoAreWe"
+          element={
+            <>
+              <WhoAreWe />
+              <Footer />
+            </>
+          }
+        />
         <Route path="*" element={<h1> 404 </h1>} />
       </Routes>
-      <Footer />
     </>
   );
 }

@@ -7,9 +7,11 @@ import {
   Button,
   InputLeftElement,
   Box,
+  useToast,
 } from "@chakra-ui/react";
 
 export default function Signup({ adminRole }) {
+  const toast = useToast();
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   const showPasswordFun = () => setShowPassword(!showPassword);
@@ -33,11 +35,65 @@ export default function Signup({ adminRole }) {
           { email, password: password1, role, phoneNumber }
         );
         console.log(result.data);
-        alert("Successful registering");
+        toast({
+          // title: "إضافة تعليق",
+          description: "تم التسجيل بنجاح",
+          // status: "success",
+          position: "top",
+          duration: 3000,
+          isClosable: true,
+        });
+        //alert("Successful registering");
       } catch (err) {
-        alert("Unsuccessful registering");
+        //alert("Unsuccessful registering");
+        if (err.request.response === "email address is not correct") {
+          toast({
+            // title: "إضافة تعليق",
+            description: "الإيميل غير صحيح",
+            // status: "success",
+            position: "top",
+            duration: 3000,
+            isClosable: true,
+          });
+        } else if (err.request.response === "the email is exist") {
+          toast({
+            // title: "إضافة تعليق",
+            description: "الإيميل موجود سابقًا",
+            // status: "success",
+            position: "top",
+            duration: 3000,
+            isClosable: true,
+          });
+        } else if (err.request.response === "the password is not complex") {
+          toast({
+            // title: "إضافة تعليق",
+            description:
+              "يجب أن تحتوي كلمة المرور على أحرف كبيرة وصغيرة وارقام ورموز",
+            // status: "success",
+            position: "top",
+            duration: 3000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            // title: "إضافة تعليق",
+            description: "كلمة المرور غير متطابقة",
+            // status: "success",
+            position: "top",
+            duration: 3000,
+            isClosable: true,
+          });
+        }
       }
-    else alert("كلمة المرور غير متطابقة");
+    else
+      toast({
+        // title: "إضافة تعليق",
+        description: "كلمة المرور غير متطابقة",
+        // status: "success",
+        position: "top",
+        duration: 3000,
+        isClosable: true,
+      });
   };
 
   return (

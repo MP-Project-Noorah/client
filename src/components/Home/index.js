@@ -17,6 +17,7 @@ const images = [
   "https://vid.alarabiya.net/images/2018/08/29/e883ce10-d54b-443c-96d3-74ec74bdb702/e883ce10-d54b-443c-96d3-74ec74bdb702_16x9_1200x676.jpg?width=1138",
   "https://d3rr2gvhjw0wwy.cloudfront.net/uploads/activity_galleries/285169/2000x2000-0-70-27bb87e7ae3dd27151fbc510fb8a9bb4.jpg",
   "https://www.experiencealula.com/getattachment/a7d5ff00-61df-4f6a-91ff-45257ed69ef0/raod_trip_panel_833x551.jpg",
+  "/b.jpeg",
 ];
 
 export default function Home() {
@@ -42,7 +43,7 @@ export default function Home() {
     ),
     url(${images[index]})`}
         w="100%"
-        h="700px"
+        h={["200px", "700px"]}
         p={4}
         color="white"
         backgroundPosition="center"
@@ -51,15 +52,27 @@ export default function Home() {
       >
         <Center>
           <Box marginTop="17%" alignItems="baseline" textAlign="center">
-            <Heading marginBottom="5%" class="home2">
+            <Heading
+              marginBottom="5%"
+              fontSize={["50%", "200%"]}
+              fontFamily="Cormorant Garamond"
+              // class="home2"
+            >
               دليل وجهتك معنا وبحسب ميزانيتك !
             </Heading>
-            <Heading marginBottom="5%" class="home1">
+            <Heading
+              marginBottom="5%"
+              fontSize={["100%", "300%"]}
+              fontFamily="Lemonada"
+            >
               في اي مكان بالسعودية
             </Heading>
             <Button
               backgroundColor="#7294BD"
               borderRadius="none"
+              h={["13px", "40px"]}
+              w={["20%", "30%"]}
+              fontSize={["40%", "100%"]}
               onClick={() => navigate(`/destinations`)}
             >
               {" "}
@@ -71,14 +84,18 @@ export default function Home() {
       <Center>
         <Box bg="white" w="70%">
           <Box textAlign="center" margin="13%">
-            <Heading fontSize="170%" fontFamily="Courier New">
+            <Heading fontSize={["70%", "170%"]} fontFamily="Courier New">
               المملكة هي وجهتك
             </Heading>
-            <Text marginTop="1.5%" fontFamily="Courier New">
+            <Text
+              marginTop="1.5%"
+              fontFamily="Courier New"
+              fontSize={["40%", "140%"]}
+            >
               عيش المتعة والجمال في جميع أنحاء الممكلة مابين دفء البحر الأحمر
               ومغامراته المائية.
             </Text>
-            <Text fontFamily="Courier New">
+            <Text fontFamily="Courier New" fontSize={["40%", "140%"]}>
               ومابين الطبيعة وأجوائها الجميلة , ومابين الجبال وتسلق جبالها ,
               ومابين أروع المناظر في تساقط الثلوج , والهروب من صخب المدينة الى
               صمت صحرائها كل هذا وأكثر بانتظاركم!{" "}
@@ -92,13 +109,13 @@ export default function Home() {
             textAlign="center"
             bg="black"
             fontFamily="Courier New"
-            padding="1%"
+            padding={["0%", "1%"]}
           >
             <Grid
               templateRows="repeat(1, 1fr)"
               templateColumns="repeat(2, 1fr)"
               shadow="md"
-              padding="3"
+              padding={["1", "3"]}
               zIndex="1"
             >
               <GridItem colSpan={1}>
@@ -109,15 +126,15 @@ export default function Home() {
                 />
               </GridItem>
               <GridItem colSpan={1}>
-                <Box p={7} color="white">
+                <Box p={["0.5", "7"]} color="white">
                   <Heading
-                    fontSize="xl"
                     fontFamily="Courier New"
-                    marginTop="10%"
+                    marginTop={["1%", "10%"]}
+                    fontSize={["50%", "170%"]}
                   >
                     الوجهات
                   </Heading>
-                  <Text mt={4}>
+                  <Text mt={4} fontSize={["30%", "140%"]}>
                     تبي ترفه نفسك او احبابك بوجهة سياحية بدون بحث عن فندق او
                     تخطيط لطلعة او اماكن ترفيهة؟ وحتى قلق الميزانية ؟ عشان كذا
                     حنا جهزنا لك وجهة سياحية متكاملة مع مين ماكانت او تكون
@@ -126,7 +143,10 @@ export default function Home() {
                     rightIcon={<ArrowBackIcon />}
                     colorScheme="teal"
                     variant="solid"
-                    marginTop="3%"
+                    marginTop={["0%", "3%"]}
+                    h={["13px", "40px"]}
+                    w={["34%", "30%"]}
+                    fontSize={["20%", "100%"]}
                     onClick={() => {
                       navigate(`destinations`);
                     }}
@@ -140,14 +160,14 @@ export default function Home() {
 
           <Box>
             <Heading
-              fontSize="xl"
               fontFamily="Courier New"
               marginTop="10%"
               textAlign="center"
+              fontSize={["70%", "170%"]}
             >
               الوجهات الأكثر طلبًا
             </Heading>
-            <Box borderWidth="2px" bg="black" w="25%" margin="auto" />
+            <Box borderWidth="2px" bg="black" w="50%" margin="auto" />
 
             <PopularItems link={"destinations"} />
           </Box>
@@ -164,7 +184,7 @@ export default function Home() {
               templateRows="repeat(1, 1fr)"
               templateColumns="repeat(2, 1fr)"
               shadow="md"
-              padding="3"
+              padding={["0%", "1%"]}
               zIndex="1"
               bg="rgb(224, 224, 235)"
             >
@@ -176,15 +196,15 @@ export default function Home() {
                 />
               </GridItem>
               <GridItem colSpan={1}>
-                <Box p={7}>
+                <Box p={["0.5", "7"]}>
                   <Heading
-                    fontSize="xl"
                     fontFamily="Courier New"
-                    marginTop="10%"
+                    marginTop={["1%", "10%"]}
+                    fontSize={["50%", "170%"]}
                   >
                     يوم في مدينتك
                   </Heading>
-                  <Text mt={4}>
+                  <Text mt={4} fontSize={["30%", "140%"]}>
                     اكتشف مدينتك من زاوية مختلفة، بحيث راح نسوي لك دليل سياحي مع
                     الناس اللي تختارها سواء اهلك او اصدقائك أو حتى ضيوفك وراح
                     تقضي أمتع الأوقات!
@@ -193,7 +213,10 @@ export default function Home() {
                     rightIcon={<ArrowBackIcon />}
                     colorScheme="teal"
                     variant="solid"
-                    marginTop="3%"
+                    marginTop={["0%", "3%"]}
+                    h={["13px", "40px"]}
+                    w={["34%", "30%"]}
+                    fontSize={["20%", "100%"]}
                     onClick={() => {
                       navigate(`/dayInYourCity`);
                     }}
@@ -207,14 +230,14 @@ export default function Home() {
 
           <Box>
             <Heading
-              fontSize="xl"
+              fontSize={["70%", "170%"]}
               fontFamily="Courier New"
               marginTop="10%"
               textAlign="center"
             >
               يوم في مدينتك الأكثر طلبًا
             </Heading>
-            <hr style={{ width: "50%", margin: "auto" }} />
+            <Box borderWidth="2px" bg="black" w="50%" margin="auto" />
 
             <PopularItems link={"dayInYourCity"} />
           </Box>

@@ -26,8 +26,8 @@ export default function PlanYourTrip() {
     <div>
       <Order
         type={"PlanYourTrip"}
-        text1={"خطط لرحلتك الآن!"}
-        text2={"وسهلناهل لك, اختر وجهتك بحسب اختياراتك واماكانك المفضلة"}
+        text1={"خطط لوجهتك الآن!"}
+        text2={"وسهلناها لك, اختر وجهتك بحسب اختياراتك واماكانك المفضلة"}
         city={""}
       />
       {/* <PlanYourTripFestivals />

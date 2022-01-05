@@ -90,6 +90,21 @@ export default function Myfav() {
                     getUserItem={getUserItem}
                     user={user}
                     select={select1}
+                    cost={item.cost}
+                    days={item.days}
+                    startDate={item.startDate}
+                    expiryDate={item.startDate}
+
+                    // id={item._id}
+                    // catg={item.catg}
+                    // name={item.name}
+                    // city={item.city}
+                    // reviews={item.reviews}
+                    // image={item.image}
+                    // getAllItems={getAllItemsDestinations}
+                    // getUserItem={getUserItem}
+                    // user={user}
+                    // select={select1}
                   />
                 );
               else return <></>;
@@ -112,6 +127,8 @@ export default function Myfav() {
                     getUserItem={getUserItem}
                     user={user}
                     select={select2}
+                    startDate={item.startDate}
+                    expiryDate={item.startDate}
                   />
                 );
               else return <></>;

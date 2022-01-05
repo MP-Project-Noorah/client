@@ -12,7 +12,19 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-export default function ItemCard({ images, name, desc }) {
+export default function ItemCard({
+  images,
+  name,
+  desc,
+  cost,
+  catg,
+  days,
+  orderCount,
+  startDate,
+  expiryDate,
+  reviews,
+  select,
+}) {
   const [imgs, setImgs] = useState(images);
   const [index, setIndex] = useState(0);
   console.log(images);
@@ -33,10 +45,27 @@ export default function ItemCard({ images, name, desc }) {
 
   return (
     <Center>
-      <Box display="flex" w="80%" marginTop="10%">
+      <Box display="flex" w="80%" marginTop="10%" marginBottom="10%">
         <Box bg="white" w="50%" p="4%">
           <Heading fontSize="xl">{name}</Heading>
           <Text mt={4}>{desc}</Text>
+          <Text mt={4}> التكلفة لكل شخص : {cost}</Text>
+          {select === "destination" || select === "dayInYourCity" ? (
+            <>
+              <Text> التصنيف : {catg}</Text>
+              {select === "destination" ? (
+                <Text>عدد الأيام: {days}</Text>
+              ) : (
+                <></>
+              )}
+              <Text>عدد مرات الطلب: {orderCount}</Text>
+              <Text>تاريخ البداية : {startDate.split("T")[0]} </Text>
+              <Text>تاريخ الإنتهاء : {expiryDate.split("T")[0]}</Text>
+              <Text>التقييم :{reviews}</Text>
+            </>
+          ) : (
+            <></>
+          )}
         </Box>
 
         {typeof imgs === "string" ? (

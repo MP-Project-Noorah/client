@@ -60,77 +60,128 @@ export default function Destinations() {
 
   const searchFun = (e) => {
     const searchWord = e.target.value;
-    console.log(searchWord);
+    //console.log(searchWord);
 
     if (searchWord) {
-      const newItems = destinations.map(
+      const newItems = destinations.filter(
         (item) =>
-          item.name.includes(searchWord) || item.city.includes(searchWord)
+          item.name.includes(searchWord) ||
+          item.city.includes(searchWord) ||
+          item.catg.includes(searchWord)
       );
 
       setFilterItems(newItems);
     } else setFilterItems(destinations);
   };
 
-  const sortDFun = (val) => {
-    console.log(val);
-    let arr = [...destinations];
-    if (val == 1) {
-      for (let i = 0; i < arr.length; i++) {
-        for (let j = i + 1; j < arr.length; j++) {
-          if (arr[i].reviews < arr[j].reviews) {
-            let swap = arr[i];
-            arr[i] = arr[j];
-            arr[j] = swap;
-          }
-        }
-      }
-      setFilterItems(arr);
-    } else if (val == 2) {
-      for (let i = 0; i < arr.length; i++) {
-        //console.log(arr[i].hotelInfo[0].price);
-        let price1 =
-          (arr[i].hotelInfo[0].price + arr[i].hotelInfo[1].price) / 2;
-        for (let j = i + 1; j < arr.length; j++) {
-          let price2 =
-            (arr[j].hotelInfo[0].price + arr[j].hotelInfo[1].price) / 2;
-          if (price1 < price2) {
-            let swap = arr[i];
-            arr[i] = arr[j];
-            arr[j] = swap;
-          }
-        }
-      }
-      //setHotels(arr);
-      // } else if (val == 3) {
-      //   let arr = [...hotels];
-      //   for (let i = 0; i < arr.length; i++) {
-      //     // console.log(arr[i].hotelInfo[0].price);
+  const bestReviews = async () => {
+    try {
+      const result = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/destinations/getTop`
+      );
 
-      //     for (let j = i + 1; j < arr.length; j++) {
-      //       if (arr[i].reviews > arr[j].reviews) {
-      //         let swap = arr[i];
-      //         arr[i] = arr[j];
-      //         arr[j] = swap;
-      //       }
-      //     }
-      //   }
-      //   setHotels(arr);
-      // } else if (val == 4) {
-      //   let arr = [...hotels];
-      //   for (let i = 0; i < arr.length; i++) {
-      //     //console.log(arr[i].hotelInfo[0].price);
-
-      //     for (let j = i + 1; j < arr.length; j++) {
-      //       if (arr[i].reviews < arr[j].reviews) {
-      //         let swap = arr[i];
-      //         arr[i] = arr[j];
-      //         arr[j] = swap;
-      //       }
-      //     }
-      //   }
-      //   setHotels(arr);
+      setFilterItems(result.data);
+      // console.log(result.data);
+    } catch (err) {
+      console.log(err);
     }
+  };
+
+  const lowestReviews = async () => {
+    try {
+      const result = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/destinations/getDown`
+      );
+
+      setFilterItems(result.data);
+      //  console.log(result.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getHPrice = async () => {
+    try {
+      const result = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/destinations/getHPrice`
+      );
+
+      setFilterItems(result.data);
+      console.log(result.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getLPrice = async () => {
+    try {
+      const result = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/destinations/getLPrice`
+      );
+
+      setFilterItems(result.data);
+      //  console.log(result.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getHNumOfOrders = async () => {
+    try {
+      const result = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/destinations/getHNumOfOrders`
+      );
+
+      setFilterItems(result.data);
+      //  console.log(result.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const sortDFun = (val) => {
+    const arr = [...destinations];
+    // console.log("ffd");
+
+    if (val == 1) {
+      bestReviews();
+    } else if (val == 2) {
+      lowestReviews();
+    } else if (val == 3) {
+      getHPrice();
+    } else if (val == 4) {
+      getLPrice();
+    } else if (val == 5) {
+      getHNumOfOrders();
+    }
+  };
+
+  const cityFun = (val) => {
+    //console.log(searchWord);
+
+    if (val) {
+      const newItems = destinations.filter(
+        (item) =>
+          item.name.includes(val) ||
+          item.city.includes(val) ||
+          item.catg.includes(val)
+      );
+
+      setFilterItems(newItems);
+    } else setFilterItems(destinations);
+  };
+
+  const catgFun = (val) => {
+    if (val) {
+      const newItems = destinations.filter(
+        (item) =>
+          item.name.includes(val) ||
+          item.city.includes(val) ||
+          item.catg.includes(val)
+      );
+
+      setFilterItems(newItems);
+    } else setFilterItems(destinations);
   };
 
   return (
@@ -142,7 +193,7 @@ export default function Destinations() {
     ),
     url("https://static1.s123-cdn-static-a.com/ready_uploads/media/2666516/800_5e05374d7cdbf.jpg")`}
         w="100%"
-        h="500px"
+        h={["200px", "300px", "400px", "500px"]}
         p={4}
         color="white"
         backgroundPosition="center"
@@ -151,10 +202,18 @@ export default function Destinations() {
       >
         <Center>
           <Box marginTop="13%" alignItems="baseline" textAlign="center">
-            <Heading marginBottom="5%" class="home2">
+            <Heading
+              marginBottom="5%"
+              fontSize={["50%", "100%", "150%", "200%"]}
+              fontFamily="Cormorant Garamond"
+            >
               وجهتك جاهزة معنا ،انت جاهز ؟
             </Heading>
-            <Heading marginBottom="5%" class="home1">
+            <Heading
+              marginBottom="5%"
+              fontSize={["100%", "170%", "220%", "300%"]}
+              fontFamily="Lemonada"
+            >
               السعودية الوجهة القادمة للعالم
             </Heading>
           </Box>
@@ -172,41 +231,70 @@ export default function Destinations() {
               h="300"
             >
               <InputGroup>
-                <Input placeholder="البحث" onChange={(e) => searchFun(e)} />
+                <Input
+                  placeholder="البحث"
+                  onChange={(e) => searchFun(e)}
+                  padding="10px"
+                  borderRadius="none"
+                />
                 <InputLeftElement children={<Search2Icon color="gray.300" />} />
               </InputGroup>
 
               <Select
-                placeholder="الأفضل مبيعًا"
+                placeholder="ترتيب على حسب: "
                 onChange={(e) => sortDFun(e.target.value)}
+                padding="10px"
+                // fontSize="50%"
+                // p="0%"
+                // direction="rtl"
+                borderRadius="none"
               >
-                <option value="1">الأعلى تقييمًا</option>
+                <option value="1" direction="ltr">
+                  الأعلى تقييمًا
+                </option>
                 <option value="2">الأقل تقييمًا</option>
-                <option value="3">الثمن من الأعلى الى الأقل </option>
+                {/* <option value="3">الثمن من الأعلى الى الأقل </option> */}
                 <option value="4">الثمن من الأقل الى الأعلى</option>
-                <option value="4">الأحدث</option>
+                <option value="5">الأفضل مبيعًا</option>
               </Select>
 
-              <Select placeholder="مكة">
-                <option value="val2">المدينة</option>
-                <option value="val3">الرياض </option>
-                <option value="val4">بريدة</option>
-                <option value="val4">أبها</option>
-                <option value="val4">جدة</option>
+              <Select
+                placeholder="اختار المدينة:"
+                onChange={(e) => cityFun(e.target.value)}
+                borderRadius="none"
+                padding="10px"
+              >
+                <option value="مكة">مكة</option>
+                <option value="المدينة">المدينة</option>
+                <option value="الرياض">الرياض </option>
+                <option value="بريدة">بريدة</option>
+                <option value="أبها">أبها</option>
+                <option value="جدة">جدة</option>
               </Select>
 
-              <Select placeholder="الكل">
-                <option value="val1">عائلي</option>
-                <option value="val2">اصدقاء</option>
-                <option value="val3">ثقافي</option>
-                <option value="val3">رياضي</option>
-                <option value="val3">ديني</option>
+              <Select
+                placeholder="التصنيف:"
+                onChange={(e) => catgFun(e.target.value)}
+                padding="10px"
+                borderRadius="none"
+              >
+                جميع الفئات
+                <option value="جميع الفئات">جميع الفئات</option>
+                <option value="عائلي">عائلي</option>
+                <option value="اصدقاء">اصدقاء</option>
+                <option value="ثقافي">ثقافي</option>
+                <option value="رياضي">رياضي</option>
+                <option value="ديني">ديني</option>
               </Select>
             </Box>
           </Box>
 
           <Grid
-            templateColumns="repeat(2, 1fr)"
+            templateColumns={[
+              "repeat(1, 1fr)",
+              "repeat(1, 1fr)",
+              "repeat(2, 1fr)",
+            ]}
             gap={6}
             marginTop="5%"
             w="100%"
@@ -224,6 +312,10 @@ export default function Destinations() {
                   getUserItem={getUserItem}
                   user={user}
                   select={select}
+                  cost={item.cost}
+                  days={item.days}
+                  startDate={item.startDate}
+                  expiryDate={item.startDate}
                 />
               );
             })}

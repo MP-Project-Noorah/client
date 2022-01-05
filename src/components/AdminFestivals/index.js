@@ -49,7 +49,7 @@ export default function AdminFestivals() {
         }
       );
 
-      console.log(result.data);
+      //console.log(result.data);
 
       getAllItems();
     } catch (err) {

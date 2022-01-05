@@ -72,7 +72,15 @@ export default function DestinationTransportation({ city }) {
 
   return (
     <div>
-      <Button onClick={onOpen}>المواصلات</Button>
+      <Button
+        onClick={onOpen}
+        w="100%"
+        borderRadius="none"
+        variant="outline"
+        colorScheme="#000066"
+      >
+        المواصلات
+      </Button>
       <Modal
         isCentered
         onClose={onClose}

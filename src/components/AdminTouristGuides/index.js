@@ -47,7 +47,7 @@ export default function AdminTouristGuides() {
         }
       );
 
-      console.log(result.data);
+      // console.log(result.data);
 
       getAllItems();
     } catch (err) {

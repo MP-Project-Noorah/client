@@ -22,6 +22,7 @@ import {
 } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Search2Icon, StarIcon } from "@chakra-ui/icons";
 import FavIcon from "../FavIcon";
 import Card from "../Card";
@@ -79,12 +80,16 @@ export default function PopularItems({ link }) {
 
   return (
     <div>
-      <Grid templateColumns="repeat(3, 1fr)" gap={6} marginTop="5%">
+      <Grid
+        templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(3, 1fr)"]}
+        gap={[1, 3, 6]}
+        marginTop="5%"
+      >
         {items.map((item) => {
           return (
             <GridItem
-              w="100%"
-              h="500"
+              w={["100%"]}
+              h={["200", "300", "400", "500"]}
               backgroundImage={
                 link === "destinations"
                   ? `url("${item.image}")`
@@ -99,29 +104,42 @@ export default function PopularItems({ link }) {
                 else navigate(`/${link}/${item._id}`);
               }}
             >
-              <Button
-                rightIcon={<ArrowBackIcon />}
-                bg="rgba(0, 0, 0, 0.0)"
-                padding="1%"
-                color="black"
-                onClick={() => {
-                  navigate(`${link}`);
-                }}
-              ></Button>
+              <Box display="flex">
+                <Button
+                  rightIcon={<ArrowBackIcon />}
+                  borderRadius="none"
+                  bg="rgba(0, 0, 0, 0.0)"
+                  padding="1%"
+                  color="black"
+                  bg="rgba(255,255,255,0.7)"
+                  onClick={() => {
+                    navigate(`${link}`);
+                  }}
+                ></Button>
+              </Box>
               <GridItem
-                w="70%"
-                h="27%"
+                w={["70%"]}
+                h={["52%", "44%", "34%", "27%"]}
                 bg="rgba(102, 102, 153, 0.8)"
-                marginTop="96%"
+                marginTop={["20%", "45%", "70%", "96%"]}
                 color="white"
+                p="4%"
               >
-                <Heading fontSize="100%">{item.name}</Heading>
+                <Heading fontSize={["80%", "87%", "94%", "100%"]}>
+                  {item.name}
+                </Heading>
                 <Text>{item.city}</Text>
-                <Text fontSize="80%">
+                <Text fontSize={["60%", "80%"]}>
                   {item.startDate.split("T")[0]} الى{" "}
                   {item.expiryDate.split("T")[0]}
                 </Text>
-                <Text>3000 ريال</Text>
+                <Text>
+                  <span style={{ fontSize: "70%" }}>الأسعار تبدأ من: </span>
+                  {link === "destinations"
+                    ? Number(item.cost) + Number(item.days) * 250
+                    : Number(item.cost)}{" "}
+                  ريال
+                </Text>
               </GridItem>
             </GridItem>
           );

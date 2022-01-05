@@ -10,9 +10,11 @@ import {
   Button,
   InputLeftElement,
   Box,
+  useToast,
 } from "@chakra-ui/react";
 
 export default function Login() {
+  const toast = useToast();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -42,10 +44,24 @@ export default function Login() {
 
       dispatch(login2(data));
 
-      alert("Successful login");
+      toast({
+        //title: "إضافة تعليق",
+        description: "تم تسجيل الدخول بنجاح",
+        //  status: "success",
+        position: "top",
+        duration: 3000,
+        isClosable: true,
+      });
       navigate("/");
     } catch (err) {
-      alert("Unsuccessful login");
+      toast({
+        //title: "إضافة تعليق",
+        description: "عذرًا اسم المستخدم او كلمة المرور خاطئة",
+        //  status: "success",
+        position: "top",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 

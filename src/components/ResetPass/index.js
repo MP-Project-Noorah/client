@@ -1,18 +1,38 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Heading, Input, Button } from "@chakra-ui/react";
+import { Heading, Input, Button, useToast } from "@chakra-ui/react";
 
 export default function ResetPass() {
+  const toast = useToast();
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
   const reset = async () => {
-    const result = await axios.post(
-      `${process.env.REACT_APP_BASE_URL}/users/resetPassword`,
-      { email }
-    );
-    console.log(result);
+    try {
+      const result = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/users/resetPassword`,
+        { email }
+      );
+      //console.log(result);
+      toast({
+        // title: "إضافة تعليق",
+        description: "تم ارسال رابط تغيير كلمة المرور",
+        // status: "success",
+        position: "top",
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch (err) {
+      toast({
+        // title: "إضافة تعليق",
+        description: "الرجاء كتابة الإيميل بشكل صحيح أو هذا الإيميل غير موجود",
+        // status: "success",
+        position: "top",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
 
     //navigate(`/`);
   };

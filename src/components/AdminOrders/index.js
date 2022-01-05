@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Input, Heading, Button, Box, Textarea } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 
 export default function AdminOrders() {
   const [orders, setOrders] = useState([]);
@@ -38,7 +38,7 @@ export default function AdminOrders() {
           },
         }
       );
-      console.log(result.data);
+      //console.log(result.data);
       getAllItems();
     } catch (err) {
       console.log(err);
@@ -61,7 +61,7 @@ export default function AdminOrders() {
           },
         }
       );
-      console.log(result.data);
+      //console.log(result.data);
       getAllItems();
     } catch (err) {
       console.log(err);

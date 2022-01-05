@@ -141,7 +141,15 @@ export default function DestinationHotel({ city }) {
   };
   return (
     <div>
-      <Button onClick={onOpen}>الفنادق</Button>
+      <Button
+        onClick={onOpen}
+        w="100%"
+        borderRadius="none"
+        variant="outline"
+        colorScheme="#000066"
+      >
+        الفنادق
+      </Button>
       <Modal
         isCentered
         onClose={onClose}

@@ -13,11 +13,13 @@ export default function Footer() {
         padding="1%"
         top="0"
         w="100%"
-        bg="rgba(0,0,0,0.5)"
+        bg="#242323"
       >
         <Box textAlign="center" color="white">
-          جميع الحقوق محفوظة لنورة المحيميد في معسكر طويق 2020
-          <Box borderWidth="2px" bg="black" w="50%" margin="5% auto" />
+          جميع الحقوق محفوظة لمعسكر طويق 1000
+          <br />
+          تم انشاء الموقع بواسطة المتدربة نورة المحيميد
+          {/* <Box borderWidth="2px" bg="black" w="50%" margin="5% auto" /> */}
         </Box>
         {/* <Box
           bg="black.100"

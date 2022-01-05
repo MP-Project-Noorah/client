@@ -85,7 +85,7 @@ export default function DestinationInfo() {
 
   return (
     <div>
-      <Tabs variant="enclosed" margin="10%" bg="white">
+      <Tabs variant="enclosed" marginTop="10%" bg="white">
         <TabList>
           <Tab>عن الرحلة</Tab>
           <Tab>خطة الوجهة</Tab>
@@ -125,6 +125,14 @@ export default function DestinationInfo() {
                 images={destination.result.image}
                 name={destination.result.name}
                 desc={destination.result.desc}
+                cost={destination.result.cost}
+                catg={destination.result.catg}
+                days={destination.result.days}
+                orderCount={destination.result.orderCount}
+                startDate={destination.result.startDate}
+                expiryDate={destination.result.expiryDate}
+                reviews={destination.result.reviews}
+                select={"destination"}
               />
             ) : (
               <></>
@@ -149,6 +157,8 @@ export default function DestinationInfo() {
                           images={item.imge}
                           name={item.name}
                           desc={item.desc}
+                          cost={item.cost}
+                          select={"festivals"}
                         />
                         {/* <CardInHome
                           name={item.name}
@@ -173,13 +183,6 @@ export default function DestinationInfo() {
           </TabPanel>
 
           <TabPanel>
-            <DestinationHotel city={city} />
-            <DestinationTouristGuides
-              city={city === "بريدة" ? "القصيم" : city}
-            />
-            <DestinationTransportation city={city} />
-            <DestinationFlights city={city} />
-            <p>التكلفة الكلية</p>
             <DestinationCost city={city} />
           </TabPanel>
         </TabPanels>

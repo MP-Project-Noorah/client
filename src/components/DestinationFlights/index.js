@@ -76,7 +76,15 @@ export default function DestinationFlights({ city }) {
 
   return (
     <div>
-      <Button onClick={onOpen}>تذاكر الطيران</Button>
+      <Button
+        onClick={onOpen}
+        w="100%"
+        borderRadius="none"
+        variant="outline"
+        colorScheme="#000066"
+      >
+        تذاكر الطيران
+      </Button>
       <Modal
         isCentered
         onClose={onClose}

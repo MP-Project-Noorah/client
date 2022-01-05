@@ -45,7 +45,7 @@ export default function DayInYourCityInfo() {
 
   return (
     <div>
-      <Tabs variant="enclosed" margin="5%">
+      <Tabs variant="enclosed" marginTop="10%" bg="white">
         <TabList>
           <Tab>عن الرحلة</Tab>
           <Tab>الحجز</Tab>
@@ -58,6 +58,13 @@ export default function DayInYourCityInfo() {
                   images={dayInYourCity.images}
                   name={dayInYourCity.name}
                   desc={dayInYourCity.desc}
+                  cost={dayInYourCity.cost}
+                  catg={dayInYourCity.catg}
+                  orderCount={dayInYourCity.orderCount}
+                  startDate={dayInYourCity.startDate}
+                  expiryDate={dayInYourCity.expiryDate}
+                  reviews={dayInYourCity.reviews}
+                  select={"dayInYourCity"}
                 />
                 {/* <h1>{dayInYourCity.name}</h1>
                 <p>{dayInYourCity.desc}</p>

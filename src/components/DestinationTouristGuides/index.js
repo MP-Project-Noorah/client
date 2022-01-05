@@ -71,7 +71,15 @@ export default function DestinationTouristGuides({ city }) {
 
   return (
     <div>
-      <Button onClick={onOpen}>المرشد السياحي</Button>
+      <Button
+        onClick={onOpen}
+        w="100%"
+        borderRadius="none"
+        variant="outline"
+        colorScheme="#000066"
+      >
+        المرشد السياحي
+      </Button>
       <Modal
         isCentered
         onClose={onClose}
